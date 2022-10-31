@@ -15,7 +15,7 @@ int st[N];
 
 void dfs(int u)
 {
-    if (u == n)     // 当走到最后一个位置时, 说明所有位置填满了
+    if (u == n)     // 当来到最后一个位置时, 说明所有位置填满了
     {
         for (int i = 0; i < n; ++ i ) printf("%d ", path[i]);
         printf("\n");
