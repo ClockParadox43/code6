@@ -1,10 +1,33 @@
 动归问题问题划分:
-1.1 背包问题:
-        AcWing02_01背包问题
-        AcWing03_完全背包问题
-        AcWing04_多重背包问题
-        AcWing05_多重背包问题II
-        AcWing09_分组背包问题
+背包问题:
+    AcWing02_01背包问题
+    AcWing03_完全背包问题
+    AcWing04_多重背包问题
+    AcWing05_多重背包问题II
+    AcWing09_分组背包问题
 
-1.2 线性DP:
-        AcWing898_数字三角形
+线性DP:
+    AcWing898_数字三角形
+    AcWing895_最长上升子序列
+    AcWing896_最长上升子序列II
+    AcWing897_最长公共子序列
+    AcWing902_最短编辑距离
+    AcWing899_编辑距离
+
+区间DP:
+    AcWing282_石子合并
+
+计数类DP:
+    AcWing900_整数划分
+
+数位统计DP:
+    AcWing338_计数问题
+
+状态压缩DP:
+    AcWing291_蒙德里安的梦想
+    AcWing091_最短Hamilton路径
+树形DP:
+    AcWing285_没有上司的舞会
+记忆化搜索
+    AcWing901_滑雪
+
