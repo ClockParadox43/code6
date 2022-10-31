@@ -4,18 +4,19 @@
             "name": "Win32",
             "includePath": [
                 "${workspaceRoot}",
-                // 以下7行需要修改
-                "D:/mingw64_GCC8.1/mingw64/include/gdb",
-                "D:/mingw64_GCC8.1/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/../../../../include",
-                "D:/mingw64_GCC8.1/mingw64/include/libiberty",
-                "D:/mingw64_GCC8.1/mingw64/include",
-                "D:/mingw64_GCC8.1/mingw64/bin",
-                // 将查询结果直接粘进来
-                "D:/mingw64_GCC8.1/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++",
-                "D:/mingw64_GCC8.1/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32",
-                "D:/mingw64_GCC8.1/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/backward",
-                "D:/mingw64_GCC8.1/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include",
-                "D:/mingw64_GCC8.1/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include-fixed"
+                // "D:/ming/include",
+                // "D:/ming/include/ddk",
+                // "D:/ming/include/gdiplus",
+                // "D:/ming/include/GL",
+                // "D:/ming/include/sys",
+                // "D:/ming/lib/gcc/mingw32/9.2.0/include",
+
+                "d:/ming/bin/../lib/gcc/mingw32/9.2.0/include/c++",
+                "d:/ming/bin/../lib/gcc/mingw32/9.2.0/include/c++/mingw32",
+                "d:/ming/bin/../lib/gcc/mingw32/9.2.0/include/c++/backward",
+                "d:/ming/bin/../lib/gcc/mingw32/9.2.0/include",
+                "d:/ming/bin/../lib/gcc/mingw32/9.2.0/../../../../include",
+                "d:/ming/bin/../lib/gcc/mingw32/9.2.0/include-fixed"
             ],
             "defines": [
                 "_DEBUG",
@@ -29,21 +30,23 @@
                 "databaseFilename": "",
                 "path": [
                     "${workspaceRoot}",
-                     // 以下7行需要修改
-                    "D:/mingw64_GCC8.1/mingw64/include/gdb",
-                    "D:/mingw64_GCC8.1/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/../../../../include",
-                    "D:/mingw64_GCC8.1/mingw64/include/libiberty",
-                    "D:/mingw64_GCC8.1/mingw64/include",
-                    "D:/mingw64_GCC8.1/mingw64/bin",
-                    // 将查询结果直接粘进来
-                    "D:/mingw64_GCC8.1/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++",
-                    "D:/mingw64_GCC8.1/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32",
-                    "D:/mingw64_GCC8.1/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/backward",
-                    "D:/mingw64_GCC8.1/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include",
-                    "D:/mingw64_GCC8.1/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include-fixed"
+                    // "D:/ming/include",
+                    // "D:/ming/include/ddk",
+                    // "D:/ming/include/gdiplus",
+                    // "D:/ming/include/GL",
+                    // "D:/ming/include/sys",
+                    // "D:/ming/lib/gcc/mingw32/9.2.0/include",
+
+
+                    "d:/ming/bin/../lib/gcc/mingw32/9.2.0/include/c++",
+                    "d:/ming/bin/../lib/gcc/mingw32/9.2.0/include/c++/mingw32",
+                    "d:/ming/bin/../lib/gcc/mingw32/9.2.0/include/c++/backward",
+                    "d:/ming/bin/../lib/gcc/mingw32/9.2.0/include",
+                    "d:/ming/bin/../lib/gcc/mingw32/9.2.0/../../../../include",
+                    "d:/ming/bin/../lib/gcc/mingw32/9.2.0/include-fixed"
                 ]
             }
         }
     ],
     "version": 4
-  }
+}

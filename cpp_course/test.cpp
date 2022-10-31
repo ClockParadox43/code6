@@ -1,9 +1,7 @@
 #include <iostream>
-#include <vector>
 
-using std::cout;
-using std::cin;
-using std::endl;
+using namespace std;
+// using std::cout;
 
 int main()
 {
@@ -14,6 +12,7 @@ int main()
         if (b & 1) res *= a;
         a *= a; 
     }
-    cout << res << endl;
+    // printf("%d", res);
+    cout << res << endl; 
     return 0;
 }
