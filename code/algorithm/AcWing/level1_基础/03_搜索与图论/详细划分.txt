@@ -1,0 +1,42 @@
+DFS
+    AcWing842_排列数字
+    AcWing843_n-皇后问题
+
+BFS
+    AcWing844_走迷宫
+    AcWing845_八数码
+
+树与图的深度优先遍历
+    AcWing846_树的重心
+
+树与图的广度优先遍历
+    AcWing847_图中点的层次
+
+拓扑排序    
+    AcWing848_有向图的拓扑序列
+
+Dijkstra
+    AcWing849_Dijkstra求最短路
+    AcWing850_Dijkstra求最短路
+
+bellman-ford
+    AcWing_853_有边数限制的最短路
+
+spfa
+    AcWing851_spfa求最短路
+    AcWing852_spfa判断负环
+
+Floyd
+    AcWing854_Floyd求最短路
+
+Prim
+    AcWing858_Prim算法求最小生成树
+
+Kruskal
+    AcWing859_Kruskal算法求最小生成树
+
+染色法判定二分图
+    AcWing860_染色法判定二分图
+
+匈牙利算法
+    AcWing861_二分图的最大匹配
