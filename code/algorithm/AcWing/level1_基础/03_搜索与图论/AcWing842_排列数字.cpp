@@ -7,7 +7,7 @@
 
 using namespace std;
 
-const int N = 7;
+const int N = 10;
 
 int n;
 int path[N];
@@ -26,8 +26,8 @@ void dfs(int u)
     {
         if (!st[i])
         {
-            path[u] = i;      
-            st[i] = true;
+            path[u] = i;        // 当前枚举到的数字作为值被记录在 path 中 
+            st[i] = true;       // 当前数字被记录为 "使用过"
             dfs(u + 1);         // 继续枚举下一个路径
 
             // 还原现场
