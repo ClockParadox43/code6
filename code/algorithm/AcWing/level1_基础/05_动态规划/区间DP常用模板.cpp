@@ -47,7 +47,7 @@ int main()
     for (int len = 1; len <= n; ++ len )            // len 表示 f[i,j] 的元素个数
         for (int i = 1; i + len - 1 <= n; ++ i )    // 起点
         {
-            int j = i + len - 1;                    // 终点
+            int j = i + len - 1;                    // 右端点
             
             // 区间中只有一个数, 合并代价为 0
             if (len == 1)
@@ -56,6 +56,7 @@ int main()
                 continue;
             }
 
+            // 枚举分割点
             // 必须满足k + 1 <= j, 右边必须还剩下数
             // 合并结果 + 合并总代价
             for (int k = i; k <= j - 1; ++ k )
