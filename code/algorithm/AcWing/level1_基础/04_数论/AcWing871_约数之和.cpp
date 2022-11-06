@@ -19,19 +19,21 @@ int main()
     int _;
     scanf("%d", &_);
     
-    unordered_map<LL, int> primes;
+    unordered_map<LL, int> primes;  // 搜集 a^b
     while (_ -- )
     {
         int n;
         cin >> n;
-        // 分解质因数, 将和最小质因子有关的合数都筛掉
+        // 枚举所有质因数
+        // 因为底数相等指数相加, 底数不相等, 将 a^b 算完后累加
+        // 所以, 以 i 为最小质因子, 所有与最小质因子有关的合数都会被除尽
         for (int i = 2; i <= n / i; ++ i )
             while (n % i == 0) n /= i, primes[i] ++ ;
         if (n > 1) primes[n] ++ ;
     }
     
     int res = 1;
-    // 每个质因数相加
+    // 收集完所有数的指数后将所有 a^b 进行累加
     // 12 = 2^2 + 3^1
     // t = t * a + 1 
     // t = 1 * 2 + 1 = 3
