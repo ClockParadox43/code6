@@ -32,6 +32,8 @@ int qmi(int a, int b, int p)
     return res;
 }
 
+// 若 b 是 m 的倍数, 则无解的, 因为 b 是 m 的倍数, 那么 b*x 也必定是 m 的倍数, 模 m 的余数为 0, 必定不为 1, 是无解的情况
+// 若 b 不是 m 的倍数, 由于 m 是质数, 那么 b 与 m 是互质的, 由费马小定理可知, b^(m-1) ≡ 1 (mod m), 一定存在逆元, 一定有解
 int main()
 {
     int _ ; scanf("%d", & _ );

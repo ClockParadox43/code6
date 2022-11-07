@@ -3,16 +3,13 @@
 using namespace std;
 // using std::cout;
 
+// 求 a 的逆元
 int main()
 {
-    int res = 1;
-    int a = 2, b = 5;
-    for (; b; b >>= 1 )
+    int a = 7, m = 3;
+    for (int i = 1; i < m; ++ i )
     {
-        if (b & 1) res *= a;
-        a *= a; 
+        if (a * i % m == 1) printf("%d\n", i);
     }
-    // printf("%d", res);
-    cout << res << endl; 
     return 0;
 }
