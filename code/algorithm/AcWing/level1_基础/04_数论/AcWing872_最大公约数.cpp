@@ -26,7 +26,11 @@ using namespace std;
 
 int gcd(int a, int b)
 {
-    return b ? gcd(b, a % b) : a;
+    if (b)
+        return gcd(b, a % b);
+    else 
+        return a;
+    // return b ? gcd(b, a % b) : a;
 }
 
 int main()
