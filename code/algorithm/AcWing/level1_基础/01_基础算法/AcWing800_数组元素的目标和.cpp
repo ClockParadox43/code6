@@ -7,6 +7,7 @@ const int N = 100010;
 int n, m, x;
 int a[N], b[N];
 
+// 二分也可以做
 // 对于每一个 i 找一个 j, 使得 a[i] + b[j] <= x
 // 因为 sum 是不变的当 i 变大时, j 变小
 
