@@ -65,6 +65,7 @@ int main()
 
     init_list();
 
+    // 因为查询是从 1 开始所以 k 要减 1 
     while (q -- )
     {
         int k, x;
