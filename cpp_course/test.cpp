@@ -1,15 +1,31 @@
 #include <iostream>
 
 using namespace std;
-// using std::cout;
 
-// 求 a 的逆元
+const int N = 100010;
+
+int q[N];
+
+void quick_sort(int* q, int l, int r)
+{
+    if (l <= r) return ;
+    
+    int i = l - 1, j = r + 1, x = q[l + r >> 1];
+    while (l < r)
+    {
+        do i ++ ; while q[i] < x;
+        do j -- ; while q[j] > j;
+        if (i < j) swap(q[i], q[j]);
+    }
+    quick_sort(q, l, j);
+    quick_sort(q, j, r + 1);
+}
+
 int main()
 {
-    int a = 7, m = 3;
-    for (int i = 1; i < m; ++ i )
-    {
-        if (a * i % m == 1) printf("%d\n", i);
-    }
+    int n; scanf("%d", &n);
+    for (int i = 0; i < n; ++ i ) scanf("%d", &q[i]);
+    quick_sort(q, 0, n);
+    for (int i = 1; i < n; ++ i ) printf("%d", &q[i]);
     return 0;
 }
