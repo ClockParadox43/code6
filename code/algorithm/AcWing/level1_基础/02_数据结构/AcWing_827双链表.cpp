@@ -42,7 +42,7 @@ void add(int k, int x)
 // o <-> k <-> 0
 void remove(int k)
 {
-    r[l[k]] = r[k];
+    r[l[k]] = r[k];  // k 做指针指向的节点的右指针指向 k 的右
     l[r[k]] = l[k];
 }
 
