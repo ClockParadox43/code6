@@ -47,7 +47,7 @@ int find(int x)
     {
         int m = l + r >> 1;
         if (alls[m] >= x) r = m;
-        else l = l + 1;   
+        else l = m + 1;   
     }
 
     return l + 1; // 舍弃 0 位置, 因为要用到前缀和, 前缀和从 1 开始不需要处理边界
@@ -93,5 +93,15 @@ int main()
     }
 
     // 预处理前缀和
-    for (int i = 1; i < alls.size(); ++ i ) s[i] = s[i - 1] + a[i];
+    for (int i = 1; i <= alls.size(); ++ i ) s[i] = s[i - 1] + a[i];
+
+    // 处理询问
+    // 找到了但是因为没有加 1 和前缀和中的数不对应
+    for (auto item : query)
+    {
+        int l = find(item.first), r = find(item.second);
+        printf("%d\n", s[r] - s[l - 1]);
+    }
+
+    return 0;
 }

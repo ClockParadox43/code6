@@ -8,10 +8,10 @@ using namespace std;
 vector<int> div(vector<int>& A, int b, int& r)
 {
     vector<int> C;
-    r = 0;
     
-    // 下个余数 = t * 10 + A[i]
+    // 余数 = t * 10 + A[i]
     // C[i] = 余数 / 除数
+    // // 下个余数 = r % b
     // 和其余运算不一样的是, 除法是从高位开始计算的 
     // 初始: 从 0 开始看, 商 0, 余数加上下一个余数
     for (int i = A.size() - 1; i >= 0; -- i )

@@ -18,6 +18,7 @@ int a[N][N], b[N][N];
 
 // x1,y1 : 矩阵左上角点
 // x2,y2 : 矩阵右下角点
+// 相当于在这个范围自动加一个 c
 void insert(int x1, int y1, int x2, int y2, int c)
 {
 	b[x1][y1] += c;

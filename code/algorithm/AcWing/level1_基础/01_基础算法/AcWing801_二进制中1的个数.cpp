@@ -4,7 +4,7 @@ using namespace std;
 
 int lowbit(int x)
 {
-    return x & -x;
+    return x & (~x + 1);
 }
 
 int main()

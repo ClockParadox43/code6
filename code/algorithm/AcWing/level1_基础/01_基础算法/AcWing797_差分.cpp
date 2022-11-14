@@ -37,7 +37,8 @@ void test()
 {
     scanf("%d%d", &n, &m);
     for (int i = 1; i <= n; ++ i ) scanf("%d", &a[i]);
-    for (int i = 1; i <= n; ++ i ) insert(i, i, a[i]);  // 生成原数组 : 从起始位置每个数字 +c, 倒数位置 -c
+    for (int i = 1; i <= n; ++ i ) insert(i, i, a[i]);  // 生成原数组 : 从起始位置每个数字 +c, 终点位置 -c,
+                                                        // b 数组加一遍就能还原回 a 数组
     
     // 查询操作
     while (m -- )
