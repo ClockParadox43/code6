@@ -21,16 +21,17 @@ const int N = 110;
 
 int n, m;
 int g[N][N];
-int d[N][N];    // 每个点到起点的距离
+int d[N][N];    // 到 [x,y] 的距离
 PII q[N * N];   // 队列
 
+// 想算到当前 [x,y] 的距离, 就把之前的距离加上方向的偏移量, 就是当前位置的坐标
 int bfs()
 {
     int hh = 0, tt = 0;
     q[0] = {0, 0};
     
     memset(d, -1, sizeof d);
-    d[0][0] = 0;
+    d[0][0] = 0;            // 该题是从 0 开始
     // 向量
     // x:行, y:列
     // u, r, d, l
