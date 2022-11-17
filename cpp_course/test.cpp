@@ -2,36 +2,50 @@
 
 using namespace std;
 
-typedef long long LL; 
-
 const int N = 100010;
 
-LL q[N], tmp[N];
+int n;
+int e[N], ne[N], h[N], idx;
+bool st[N];
 
-LL merge_sort(int* q, int l, int r)
+int add(int a, int b)
 {
-    if (l >= r) return 0;
-    m = l + r >> 1;
-    int res = merge_sort(q, l, m) + merge_sort(q, m + 1, r);
-    int k = 0, i = l, j = m + 1;
-    while (i <= m && i <= r)
-        if (q[i] <= q[j]) tmp[k ++ ] = q[i ++ ]; 
-        else
+    e[idx] = b, ne[idx] = h[a], h[a] = idx ++ ;
+}
+
+int dfs(int u)
+{
+    st[u] = true;
+    
+    // res : 当前树的联通块最大
+    // sum : 自己作为子树的大小
+    int sum = 1, res = 0;
+    for (int i = h[u]; i != -1; i = ne[i])
+    {
+        int j = e[i];
+        if (!st[j])
         {
-            res = m - i + 1;
-            tmp[k ++ ] = q[j ++ ];
+            int s = dfs(j);
+            res = max(s, res);
+            sum += s;
         }
-    while (i < m) tmp[k ++ ] = q[i ++ ];
-    while (j < r) tmp[k ++ ] = q[j ++ ];
-    for (int i = l, j = 0; i <= r; ++ i, ++ j ) q[i] = tmp[j];
-    return res;
+    }
+
+    res = max(res, n - sum);
+    ans = min(res, s);
+    return sum;
 }
 
 int main()
 {
     int n;
     scanf("%d", &n);
-    for (int i = 0; i < n; ++ i ) scanf("%d", &a[i]);
-    cout << merge_sort(q, 0, n-1);
+    for (int i = 0; i < n - 1; ++ i )
+    {
+        int a, b;
+        scanf("%d%d", &a, &b);
+        add(a, b);
+    } 
+
     return 0;
 }

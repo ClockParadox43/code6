@@ -22,8 +22,7 @@ void add(int a, int b)
 }
 
 // u : 当前节点
-// i = h[u] : 取出的是当前值的序号
-// 取出以 i 为首的节点的孩子 j
+// 已 u 节点为头遍历 u 的孩子
 void dfs(int u)
 {
     st[u] = true; // 标记一下, 已经被搜过了

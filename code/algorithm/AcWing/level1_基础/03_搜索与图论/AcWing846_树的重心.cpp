@@ -40,13 +40,13 @@ int dfs(int u)
             // s : 自己的子树的大小
             // sum : 自己的儿子是自己作为子树的一部分
             int s = dfs(j);
-            res = max(res, s);   // 当前树和子树求做大着值   
+            res = max(res, s);   // 对比自己的子树大小(对比联通块大小)   
             sum += s;            // 子树大小加上自己
         }
     }
 
     res = max(res, n - sum); // 当前树和上面子树求最大
-    ans = min(ans, res);     // 所有子树中求最小
+    ans = min(ans, res);     // 求联通块最小
     return sum;     // 返回以自己为头的子树数量
 }
 
