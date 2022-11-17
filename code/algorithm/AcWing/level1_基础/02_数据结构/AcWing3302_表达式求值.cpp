@@ -1,0 +1,61 @@
+#include <iostream>
+#include <cstring>
+#include <algorithm>
+#include <stack>
+#include <unordered_map>
+
+using namespace std;
+
+stack<int> num;
+stack<char> op;
+
+// 用末尾的运算符操作末尾的两个数
+void eval()
+{
+    auto b = num.top(); num.pop();
+    auto a = num.top(); num.pop();
+    auto c = op.top(); op.pop();
+    int x;
+    if (c == '+') x = a + b;
+    else if (c == '-') x = a - b;
+    else if (c == '*') x = a * b;
+    else x = a / b;
+    num.push(x);
+}
+
+int main()
+{
+    // 运算符优先级
+    unordered_map<char, int> pr{ {'+', 1}, {'-', 1}, {'*', 2}, {'/', 2} };
+    string str;
+    cin >> str;
+    for (int i = 0; i < str.size(); ++i)
+    {
+        auto c = str[i];
+        if (isdigit(c))     // 如果当前是数字
+        {
+            int x = 0, j = i;
+            while (j < str.size() && isdigit(str[j]))
+                x = x * 10 + str[j++] - '0';
+            i = j - 1;         // 
+            num.push(x);       // 数字入栈
+        }
+        else if (c == '(') op.push(c);      // 如果是左括号直接将做括号入栈, 直到遇到右括号为止
+        else if (c == ')')
+        {
+            while (op.top() != '(') eval();
+            op.pop();           // 弹出左括号
+        }
+        else
+        {
+            // 如果栈是不空的 且 栈顶元素优先级大于等于当前元素的优先级 且栈顶不是左括号
+            while (op.size() && op.top() != '(' && pr[op.top()] >= pr[c]) 
+                eval();
+            op.push(c);
+        }
+    }
+    while (op.size()) eval();
+    cout << num.top() << endl;
+
+    return 0;
+}

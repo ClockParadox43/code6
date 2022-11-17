@@ -2,50 +2,32 @@
 
 using namespace std;
 
+// 向链表头插入一个数
+// 删除第 k 个插入的数后面的数
+// 在第 k 个插入的数后插入一个数
+
 const int N = 100010;
 
-int n;
-int e[N], ne[N], h[N], idx;
-bool st[N];
+int head, e[N], ne[N], idx; 
 
-int add(int a, int b)
+void init_list()
 {
-    e[idx] = b, ne[idx] = h[a], h[a] = idx ++ ;
+    head = -1, idx = 0;
 }
 
-int dfs(int u)
+void add_to_head(int k)
 {
-    st[u] = true;
-    
-    // res : 当前树的联通块最大
-    // sum : 自己作为子树的大小
-    int sum = 1, res = 0;
-    for (int i = h[u]; i != -1; i = ne[i])
-    {
-        int j = e[i];
-        if (!st[j])
-        {
-            int s = dfs(j);
-            res = max(s, res);
-            sum += s;
-        }
-    }
-
-    res = max(res, n - sum);
-    ans = min(res, s);
-    return sum;
+    e[idx] = k, ne[idx] = head, head = idx ++ ;
 }
+
+void add(int k, int x)
+{
+    e[idx] = x, ne[idx] = ne[k], ne[k] = idx ++ ; 
+}
+
+
 
 int main()
 {
-    int n;
-    scanf("%d", &n);
-    for (int i = 0; i < n - 1; ++ i )
-    {
-        int a, b;
-        scanf("%d%d", &a, &b);
-        add(a, b);
-    } 
-
     return 0;
 }
