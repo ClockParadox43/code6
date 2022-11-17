@@ -2,32 +2,24 @@
 
 using namespace std;
 
-// 向链表头插入一个数
-// 删除第 k 个插入的数后面的数
-// 在第 k 个插入的数后插入一个数
-
 const int N = 100010;
 
-int head, e[N], ne[N], idx; 
+int stk[N], tt;
 
-void init_list()
-{
-    head = -1, idx = 0;
-}
-
-void add_to_head(int k)
-{
-    e[idx] = k, ne[idx] = head, head = idx ++ ;
-}
-
-void add(int k, int x)
-{
-    e[idx] = x, ne[idx] = ne[k], ne[k] = idx ++ ; 
-}
-
-
-
+// 输出每个数左边第一个比它小的数, 如果不存在则输出 −1
+// 也就是说左边
 int main()
 {
+    int n;
+    scanf("%d", &n);
+    
+    while (n -- )
+    {
+        while (tt && stk[tt] >= x) tt -- ;    // 如果栈顶元素小那么当前的 x 就找到目标值
+        if (!tt) printf("-1 ");
+        else printf("%d", stk[tt]);
+        stk[ ++ tt] = x;
+    }
+
     return 0;
 }

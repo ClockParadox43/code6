@@ -37,7 +37,7 @@ int main()
             int x = 0, j = i;
             while (j < str.size() && isdigit(str[j]))
                 x = x * 10 + str[j++] - '0';
-            i = j - 1;         // 
+            i = j - 1;         // i 顺势来到操作符的位置
             num.push(x);       // 数字入栈
         }
         else if (c == '(') op.push(c);      // 如果是左括号直接将做括号入栈, 直到遇到右括号为止

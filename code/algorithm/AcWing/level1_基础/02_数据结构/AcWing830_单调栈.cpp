@@ -5,6 +5,8 @@
 //    如果栈顶元素大, 那么栈顶指针左移, 直到找到目标值, 再将当前数组元素入栈, 这样就保持了栈内元素大小的递增性
 //    我们不必在意这个过程破坏了栈的结构, 因为之前的数已经找到之前数组元素对应的目标值了
 // 如果栈顶数据 >= x, 就弹出
+//
+// 单调栈的特点找到左边/右边离他最近的数
 #include <iostream>
 
 using namespace std;
@@ -13,15 +15,18 @@ const int N = 100010;
 
 int stk[N], tt;
 
+// 输出每个数左边第一个比它小的数, 如果不存在则输出 −1
+// 也就是说左边
 int main()
 {
     int n;
-    cin >> n;
+    scanf("%d", &n);
+    
     while (n -- )
     {
         int x;
         scanf("%d", &x);
-        while (tt && stk[tt] >= x) tt -- ;
+        while (tt && stk[tt] >= x) tt -- ;    // 如果栈顶元素小那么当前的 x 就找到目标值
         if (!tt) printf("-1 ");
         else printf("%d ", stk[tt]);
         stk[ ++ tt] = x;

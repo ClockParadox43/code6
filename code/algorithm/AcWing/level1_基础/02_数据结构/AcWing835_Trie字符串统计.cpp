@@ -6,8 +6,8 @@ const int N = 100010;
 
 // son[][26]: 每个节点最多只会向外连 26 条边
 // cnt[]: 以当前单词结尾的单词有多少个
-//   idx: 当前用到的哪个下标
-// 下标是 0 的点, 即是根节点, 又是空节点
+//   idx: 序号是独一无二的, 层数 + 字符都能有一个独一无二的 idx
+// 下标是 0 的点, 即是根节点, 又是空节点,
 int son[N][26], cnt[N], idx;    
 char str[N];
 
@@ -17,10 +17,10 @@ void insert(char* str)
     for (int i = 0; str[i]; ++ i )
     {
         int u = str[i] - 'a';                           // 算出要映射的位置 0~25
-        if (!son[p][u]) son[p][u] = ++ idx ;            // 如果不存在该节点, 创建出一个新的
-        p = son[p][u];
+        if (!son[p][u]) son[p][u] = ++ idx ;            // 注意是当前第 p 层, 如果不存在该节点, 创建出一个新的, ++ idx 可以让 p 直接往下跳
+        p = son[p][u];                                  // 因为 son 里面存的是 idx, 所以 p = son[p, u] 可以来到之前出现过的节点, 像一种映射
     }
-    cnt[p] ++ ;
+    cnt[p] ++ ;                 // 如果这个 idx 没有被记录过就 ++ 
 }
 
 int query(char* str)
