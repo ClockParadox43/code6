@@ -23,6 +23,7 @@ void insert(char* str)
     cnt[p] ++ ;                 // 如果这个 idx 没有被记录过就 ++ 
 }
 
+// 没有该字符会返回 0, 如果是子串且不存在, 那么就不会记录以这个单词 idx
 int query(char* str)
 {
     int p = 0;
