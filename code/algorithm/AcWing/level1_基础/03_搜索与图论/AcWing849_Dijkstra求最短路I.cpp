@@ -47,7 +47,8 @@ int dijkstra()
     
         st[t] = true;       // t 已经确定为最
         
-        // 选出来的 t 去更新到其他点的更短距离, j 代表 0~j 号点的距离
+        // 选出来的 t 去更新到各个点更短的距离, g[t][j]: t~j 的距离
+        // j 代表 0~j 号点的距离
         for (int j = 1; j <= n; ++ j )
             dist[j] = min(dist[j], dist[t] + g[t][j]);
     }
