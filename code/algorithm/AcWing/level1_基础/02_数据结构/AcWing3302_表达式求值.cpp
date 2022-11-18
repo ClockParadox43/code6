@@ -41,12 +41,12 @@ int main()
             num.push(x);       // 数字入栈
         }
         else if (c == '(') op.push(c);      // 如果是左括号直接将做括号入栈, 直到遇到右括号为止
-        else if (c == ')')
+        else if (c == ')')  // 找到收括号就结算当前数
         {
             while (op.top() != '(') eval();
             op.pop();           // 弹出左括号
         }
-        else
+        else        // 碰到运算符情况
         {
             // 如果栈是不空的 且 栈顶元素优先级大于等于当前元素的优先级 且栈顶不是左括号
             while (op.size() && op.top() != '(' && pr[op.top()] >= pr[c]) 

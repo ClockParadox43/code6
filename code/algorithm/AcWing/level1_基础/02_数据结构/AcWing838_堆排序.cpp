@@ -49,4 +49,5 @@ int main()
         sz -- ;
         down(1);
     }
+    return 0;
 }

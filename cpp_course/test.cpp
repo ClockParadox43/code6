@@ -1,30 +1,38 @@
 #include <iostream>
+#include <cstring>
+#include <algorithm>
+#include <stack>
+#include <unordered_map>
 
 using namespace std;
 
-const int N = 100010;
-
-int n, m;
-int h[N], sz;
-
-
-void down(int u)
-{
-    int t = u;
-    if (u << 1 <= sz && h[u << 1] < h[t]) t = u << 1;
-    if (u << 1 | 1 <= sz && h[u << 1 | 1] < h[t]) t = u << 1 | 1;
-    if (u != t)
-    {
-        swap(h[u], h[t]);
-        down(t);
-    }
-}
-
 int main()
 {
-    scanf("%d%d", &n, &m);
-    for (int i = 1; i <= n; ++ i ) scanf("%d", &h[i]);
-    sz = n;
-    
-    for (int i = sz >> 1; i; -- i ) down(i);
+    unordered_map<char, int> pr{{'+', 1}, {'-', 1}, {'*', 2}, {'/', 2}};
+    string str;
+    cin >> str;
+
+    for (int i = 0; i < str.size(); ++ i )
+    {
+        auto c = str[i];
+        if (isdigit(c))
+        {
+            int x = 0, j = i;
+            while (j < str.size() && isdigit(str[j]))
+                x = x * 10 + str[j ++ ];
+            i = j - 1;
+            num.push(x);
+        }
+        else if (c == '(') op.push(c);
+        else if (c == ')')      // 找到收括号就结算当前数
+        {
+            while (op.top() != '(') evel();
+            op.pop(c);
+        }
+        else 
+        {
+            while (op.size() && op.top() != '(' && pr[op.top()] >= pr[c]) eval();
+            op.push(c);
+        }
+    }
 }
