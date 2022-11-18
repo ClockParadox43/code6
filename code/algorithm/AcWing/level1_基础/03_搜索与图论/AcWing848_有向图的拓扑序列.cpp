@@ -6,7 +6,12 @@
 // 思路: 将入度为 0 的点入队列, 再删去该点指向的点的所有边
 // 入度: 一个点, 被指向的数量
 // 所谓的 top 序列是只有从前指向后面的边,没有从后指向前面的边
-
+//
+// 1) 存储边和入度
+// 2) 将入度为 0 的点挑出来存入队列
+// 3) 用队列处理这些入度为 0 的点
+//          - 遍历 a 的所有出边, 解除 a 与 b 的联系, b 的入度 -1
+//          - 如果 b 的入度等于 0 就可以入队列处理下一批
 
 #include <iostream>
 #include <algorithm>
@@ -16,7 +21,7 @@ using namespace std;
 
 const int N = 100010;
 
-int n, m;
+int n, m;                    // n 个点, m 条有关系的边 
 int h[N], e[N], ne[N], idx; 
 int q[N], d[N];             // q[]:队列(保存入度为 0, 也就是能够输出的点), d[]: 入度为 0 
 
@@ -37,13 +42,13 @@ bool topsort()
         int a = q[hh ++ ];      
         for (int i = h[a]; i != -1; i = ne[i])   // 循环删除 a 的出边   
         {
-            int b = e[i];           // t 有一条边指向  
-            d[b] -- ;
-            if (d[b] == 0) q[ ++ tt] = j;
+            int b = e[i];       // a 有一条边指向 b  
+            d[b] -- ;           // 删除 b 这条边后, b 入度减 1          
+            if (d[b] == 0) q[ ++ tt] = b;   // 如果 b 入度为 0, 则 b 可以入队列
         }
     }
 
-    return tt == n - 1;    
+    return tt == n - 1;  // 如果队列中的点的个数与图中点的个数相同，则可以进行拓扑排序  
 }
 // 出队列的顺序就是 top 序
 // 出队列只是把指针从前往后移动一位
@@ -53,18 +58,16 @@ int main()
 {
     scanf("%d%d", &n, &m);
     memset(h, -1, sizeof h);
-    for (int i = 0; i < m; ++ i )
+    for (int i = 0; i < m; ++ i )   // 依次读入边
     {
         int a, b;
         scanf("%d%d", &a, &b);
         add(a, b);
-        d[b] ++ ;       // b 的入度 ++ 
+        d[b] ++ ;       // b 的入度加 1
     }
 
     if (topsort())
-    {
         for (int i = 0; i < n; ++ i ) printf("%d ", q[i]);
-    }
     else puts("-1");
     return 0;
 }
