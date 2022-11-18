@@ -13,6 +13,7 @@ using namespace std;
 typedef unsigned long long ULL;  // 溢出相当于直接取模 
 const int N = 1e5 + 5, P = 131;
 
+char str[N];
 ULL h[N], p[N];     // h[]:前缀和数组, p[]:字符串数组
 
 // h[i] 前 i 个字符的 hash 值
@@ -28,17 +29,15 @@ ULL query(int l, int r)
 int main()
 {
     int n, q;
-    scanf("%d%d", &n, &q);
-    string x;
-    cin >> x;
+    scanf("%d%d%s", &n, &q, str + 1);
+    
 
     // 字符串从1开始编号，h[1]为前一个字符的哈希值
     p[0] = 1;
-    h[0] = 0;
-    for (int i = 0; i < n; ++ i )
+    for (int i = 1; i <= n; ++ i )
     {
-        p[i + 1] = p[i] * P;
-        h[i + 1] = h[i] * P + x[i]; // 前缀和求整个字符串哈希值 
+        p[i] = p[i - 1] * P;          // 每一位变成 P 进制
+        h[i] = h[i - 1] * P + str[i]; // 前缀和求整个字符串哈希值 
     }
 
     while (q -- )

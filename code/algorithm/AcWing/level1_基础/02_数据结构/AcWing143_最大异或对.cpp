@@ -25,13 +25,14 @@ void insert(int x)
     }
 }
 
+
 int query(int x)
 {
     int res = 0, p = 0;             // 每次 x 都要找和自己异或最大的路径, 每个 a[i] 都枚举
     for (int i = 30; ~i; -- i)
     {
         int u = x >> i & 1;         // 取出 x 的第 i 位, 如果第 i 位置是 0 那我就要 1 
-        if (son[p][!u])             // u 为 0, !u 就是 1, 如果存在那就贡献一位 1
+        if (son[p][!u])             // u 为 0, !u 就是 1, 如果存在那就贡献一位 1, u = 1, 就要找 0, 相异为 1, 找和自己不同的数即可
         {                           // 每次往下走一层, 看看当前层是否有合适的位置
             res += 1 << i;          
             p = son[p][!u];
@@ -50,8 +51,12 @@ int main()
         insert(a[i]);
     }
 
+    // 让没个数都去找一个对于自己最大的异或队
+    // 最大中求最大
     int ans = 0;
     for (int i = 0; i < n; ++ i )       
-        res = max(ans, query(a[i]));   
+        ans = max(ans, query(a[i]));   
     printf("%d", ans);
+
+    return 0;
 }

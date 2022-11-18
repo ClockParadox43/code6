@@ -30,12 +30,12 @@ void merge(vector<PII>& segs)
     for (auto seg : segs)     
         if (ed < seg.first)     
         {
-            if (st != -2e9) res.push_back({st, ed});    // 不能是初始区间
+            if (st != -2e9) res.push_back({st, ed});    // 说明已经有新的区间了, 将旧的区间放入但, 不能是初始区间, 初始区间还需要再进一步合并
             st = seg.first, ed = seg.second;
         }
         else ed = max(ed, seg.second);
     
-    // 如果有区间的话, 将最后的区间加入答案
+    // 如果还剩区间的话, 将最后的区间加入答案, 或者本来就只有一个区间
     if (st != -2e9) res.push_back({st, ed});    
     segs = res;
 }

@@ -4,6 +4,9 @@ using namespace std;
 
 const int N = 100010;
 
+// 小节: 如果有相同的字符, cnt[p] 对应的字母数量 ++  
+//       如果不是相同字母, 一定会另开节点, idx一直在累加, 一定是之前没有的
+
 // son[][26]: 每个节点最多只会向外连 26 条边
 // cnt[]: 以当前单词结尾的单词有多少个
 //   idx: 序号是独一无二的, 层数 + 字符都能有一个独一无二的 idx
@@ -11,6 +14,7 @@ const int N = 100010;
 int son[N][26], cnt[N], idx;    
 char str[N];
 
+// 下次有类似的前缀还可以根据这个 idx 找到
 void insert(char* str)
 {
     int p = 0;

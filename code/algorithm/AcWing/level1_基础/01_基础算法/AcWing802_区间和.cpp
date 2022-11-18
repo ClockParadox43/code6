@@ -54,6 +54,7 @@ int find(int x)
 }
 
 // 1) 读入所有数据, 将用到的下标的下标全部离散化
+// 2) 去重, 将要用到的下标生成出前缀和
 int main()
 {
     scanf("%d%d", &n, &m);
@@ -84,6 +85,15 @@ int main()
     sort(alls.begin(), alls.end());
     alls.erase(unique(alls.begin(), alls.end()), alls.end());
 
+    
+    // 排序后, 按照 alls 的规格进行离散, 也按照 alls 的规格进行查找
+    // 因为已经排序过了, item 的下标已经和返回后的下标不是一个下标了
+    // 排序后的 item 的下标映射到了一个新的 x, 根据这个新的 x 进行插入进行生成前缀和, 所以找到的 l,r 也适用 
+    // 所以找到的 l,r 可以和前缀和中范围的数字一一对应起来
+    // 简单来说就是:
+    //      将原下标映射到更紧凑的下标
+    //      将这些要用到的下标进行离散化
+
     // 找到了离散化后值, 在该位置 +c
     // x = x+1 
     for (auto item : add)
@@ -92,11 +102,13 @@ int main()
         a[x] += item.second;
     }
 
-    // 预处理前缀和
+    
+    // 预处理前缀和, 处理离散化的下标, 再这些区间中生成前缀和, 大范围变成了小范围
     for (int i = 1; i <= alls.size(); ++ i ) s[i] = s[i - 1] + a[i];
 
     // 处理询问
     // 找到了但是因为没有加 1 和前缀和中的数不对应
+    // 同时也将 alls 的范围映射到了 query 数组上, 所以说下标可以干很多事情
     for (auto item : query)
     {
         int l = find(item.first), r = find(item.second);

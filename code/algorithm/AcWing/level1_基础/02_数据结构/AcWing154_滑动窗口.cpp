@@ -27,7 +27,7 @@ int main()
         while (hh <= tt && a[q[tt]] >= a[i]) -- tt ; 
         // 要么代替之前的要么插入队尾
         q[ ++ tt] = i; 
-        // 如果是前 k 个数的话
+        // 如果已经生成窗口
         if (i >= k - 1) printf("%d ", a[q[hh]]);
     }
     puts("");
