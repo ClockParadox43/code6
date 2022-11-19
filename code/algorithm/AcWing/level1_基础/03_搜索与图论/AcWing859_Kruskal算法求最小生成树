@@ -1,0 +1,77 @@
+// Kruskal 算法
+// 1) 将所有边按照权重从小到大排序 O(mlogm)
+// 2) 枚举每条边 a,b 权重是 c
+//      if (a,b 不联通)
+//          将这条边加入集合中
+//
+// 思想: 从小到大枚举每条边加入生成树当中去
+//       两条边不在一个集合就合并成一个集合
+//
+// Kruskal 不需要邻接表邻接矩阵存图, 只要有边即可
+// 因此可以用结构体
+
+#include <iostream>
+#include <algorithm>
+
+using namespace std;
+
+const int N = 200010;
+
+int n, m;
+int p[N];
+
+struct Edge
+{
+    int a, b, w;
+    bool operator<(const Edge& W) const 
+    {
+        return w < W.w;
+    }
+}edges[N];
+
+int find(int x)
+{
+    if (x != p[x]) p[x] = find(p[x]); 
+    return p[x];
+}
+
+int main()
+{
+    scanf("%d%d", &n, &m);
+    for (int i = 0; i < m; ++ i ) 
+    {
+        int a, b, w;
+        scanf("%d%d%d", &a, &b, &w);
+        edges[i] = {a, b, w};
+    }
+
+    sort(edges, edges + m);
+
+    // 初始化并查集
+    for (int i = 1; i <= m; ++ i ) p[i] = i;
+
+    // res: 最小生成数 数边的权重之和
+    // cnt: 存的是当前多少条边
+    int res = 0, cnt = 0;
+
+    // 枚举所有边选出最小的合并近集合, 如果是同一个顶点的会被并查集直接排除掉
+    for (int i = 0; i < m; ++ i )
+    {
+        int a = edges[i].a, b = edges[i].b, w = edges[i].w;
+        // 找到 a, b 的祖先节点
+        a = find(a), b = find(b);
+        // union
+        if (a != b)
+        {
+            p[a] = b;
+            res += w;
+            ++ cnt;
+        }        
+    }
+
+    // n 个点 n-1 条边, 如果 < n-1 输出 false
+    if (cnt < n - 1) puts("impossible");
+    else printf("%d", res);
+
+    return 0;
+}
