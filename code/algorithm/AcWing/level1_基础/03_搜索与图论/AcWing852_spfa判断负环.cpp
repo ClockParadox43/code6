@@ -6,8 +6,8 @@
 // dist[x] = dist[t] + w[i]
 //  cnt[x] = cnt[t] + 1     从 1~t 的边数 + 1 条边就是 1~x 的边数
 // 思路: 如果 cnt[x] >= n 一共有 n 个点, 那么就有 n-1 条边
-//       这就代表着 一定有环
-
+//       这就代表着 一定有环, 因为是循环到队列为空, 所以所有边都会看一遍
+// 
 #include <iostream>
 #include <algorithm>
 #include <queue>

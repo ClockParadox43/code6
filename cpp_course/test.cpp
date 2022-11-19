@@ -1,47 +1,59 @@
 #include <iostream>
+#include <cstring>
+#include <algorithm>
 
 using namespace std;
 
-const int N = 510;
-const int INF = 0x3f3f3f3f;
-
+const int N = 100010, 
 int n, m;
-int g[N][N];
-int dist[N];       // 0~j 当前的最短距离 
-bool st[N];
+int h[N], e[N], w[N], ne[N], idx;
+int dist[N], st[N]; 
 
-int dijstra()
+void add(int a, int b, int c)
+{
+    e[idx] = b, w[idx] = c, ne[idx] = h[a], h[a] = idx ++ ;
+}
+
+void spfa()
 {
     memset(dist, 0x3f, sizeof dist);
     dist[1] = 0;
-
-    for (int i = 0; i < n; ++ j )
+    queue<int> q;
+    q.push(1);
+    while (q.size())
     {
-        int t = -1;
-        for (int j = -1; j <= n; ++ j )
-            if (!st[j] && (t == -1 || dist[t] > dist[j])) t = j;
-        st[t] = true;
-        for (int j = 1; i <= n; ++ j )
-            dist[j] = min(dist[j], dist[t] + g[t][j]); 
+        int t = q.front();
+        q.pop();
+        st[t] = false;
+        for (int i = h[t]; i != -1; i = ne[i])
+        {
+            int j = e[i];
+            if (dist[j] > w[i] + dist[t])
+            {
+                dist[j] = w[i] + dist[t];
+                if (!st[t])
+                {
+                    q.push(t);
+                    st[t] = true;
+                }
+            }
+        }
     }
+    if (dist[n] == 0x3f3f3f3f) return -1;
+    else return dist[n]; 
 }
 
 int main()
-{
+{   
     scanf("%d%d", &n, &m);
-    for (int i = 1; i <= n; ++ i )  
-        for (int j = 1; j <= n; ++ j )
-            if (i == j) g[i][j] = 0;
-            else g[i][j] = INF;
-    
+    memset(h, -1, sizeof h);
     while (m -- )
     {
         int a, b, c;
         scanf("%d%d%d", &a, &b, &c);
-        g[a][b] = min(g[a][b], c);
+        add(a, b, c);
     }
-
-    int t = dijkstra();
-    
+    if (dist[n] == 0x3f3f3f3f) puts("impossible");
+    else printf("%d\n", dist[n]);
     return 0;
 }

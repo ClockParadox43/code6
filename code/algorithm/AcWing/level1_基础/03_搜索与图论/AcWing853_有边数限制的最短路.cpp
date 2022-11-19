@@ -64,7 +64,7 @@ struct Edge
 // 3 \  v
 //      3
 
-int bellman_ford()
+void bellman_ford()
 {
     memset(dist, 0x3f, sizeof dist);
     dist[1] = 0;
@@ -78,7 +78,7 @@ int bellman_ford()
         {
             // edges[i]:第 i 条边
             int a = edges[j].a, b = edges[j].b, w = edges[j].w;
-            // dist[b]:dist数组之前的最短距离, a + w = a->b 的距离 
+            // dist[b]: 1~b 的距离, backup[a] + w: a~b 的权重, 取最小 
             dist[b] = min(dist[b], backup[a] + w);
         }
     }
@@ -95,7 +95,7 @@ int main()
         edges[i] = {a, b, w};
     }
     bellman_ford();
-    // 负权边, 防止 0x3f 被更新所以不能等于, 规定大于一个特定的值即可 
+    // 因为负权边, 防止 0x3f 被更新所以不能等于, 规定大于一个特定的值即可 
     if (dist[n] > 0x3f3f3f3f / 2) puts("impossible");
     else printf("%d\n", dist[n]);
     return 0;

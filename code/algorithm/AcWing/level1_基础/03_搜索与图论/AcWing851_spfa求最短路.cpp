@@ -1,4 +1,4 @@
-// bellman ford 每次循环都要遍历每条边
+// bellman ford 很傻, 每次循环都要遍历每条边
 // spfa 对此进行了优化, 用宽度优先搜索
 // 1) 起点入队列 
 //    dist[b] = min(dist[b], dist[a] + w)
@@ -23,8 +23,6 @@
 #include <cstring>
 
 using namespace std;
-
-typedef pair<int, int> PII;
 
 const int N = 100010;
 
