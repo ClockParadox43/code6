@@ -1,28 +1,34 @@
-// 2) 约数个数
-
 #include <iostream>
 #include <unordered_map>
 
-using namespace std; 
+using namespace std;
 
+const int mod = 1e9 + 7;
 typedef long long LL;
-const int N = 1e9 + 7;
 
 int main()
 {
-    int n; scanf("%d", &n);
+    int q; scanf("%d", &q);
     unordered_map<LL, int> primes;
-    while (n -- )
+    while (q -- )
     {
         int x; scanf("%d", &x);
-        for (int i = 2; i <= n / i; ++ i )
-            while (x % i == 0)
-                x /= i, primes[i] ++ ;  
-        if (x > 1) primes[x] ++ ;
+        for (int i = 2; i <= x / i; ++ i )
+            while (n % i == 0) x /= i, primes[i] ++ ;
+        if (x > 1) primes[x] ++ ; 
     }
-    
-    LL res = 1;
-    for (auto x : primes) res = (res * (x.second + 1)) % mod; 
+    int res = 1;
+    for (atuo p : primes) 
+    {
+        int a = p.first, b = p.second;
+        LL t = 1;
+        while (b >= 0) 
+        {
+            t += a * b % mod;
+            -- b;
+        } 
+        res = res * t % mod;
+    }
     cout << res << endl;
     return 0;
 }
