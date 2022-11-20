@@ -13,7 +13,7 @@
 #include <cstring>
 
 using namespace std;
-const int N = 1e5 + 10, M = 2e5 + 10;   // 由于是无向图, 顶点数最大是N，那么边数M最大是顶点数的2倍
+const int N = 100010, M = 200010;   // 由于是无向图, 顶点数最大是N，那么边数M最大是顶点数的2倍
 int e[M], ne[M], h[N], idx;
 int st[N];
 
@@ -23,16 +23,19 @@ void add(int a, int b)
     e[idx] = b, ne[idx] = h[a], h[a] = idx ++ ;
 }
 
-bool dfs(int u, int color)
+bool dfs(int u, int c)
 {
-    st[u] = color;
-    for (int i = h[u]; i != -1; i = ne[i] )
+    st[u] = c;         
+    for (int i = h[u]; i != -1; i = ne[i])  
     {
         int j = e[i];
-        if (!st[j])  // 没有染色过就去深度优先遍历
-            if (!dfs(j, 3 - color)) return false;       
-        else if (st[j] == color) return false;          // 相邻的边同一种颜色
+        if (!st[j])
+        {
+            if(!dfs(j, 3 - c)) return false;  // 没有染色过就去深度优先遍历
+        }
+        else if (st[j] == c) return false;  // 相邻的边同一种颜色
     }
+
     return true;
 }
 
@@ -52,11 +55,11 @@ int main()
     // 遍历所有点, 每次将未染色的点进行 dfs, 默认染成 1 或者 2
     // 如果是一棵树 DFS 可以全部染完, 图就不一定了
     bool flag = true;
-    for (int i = 1; i <= n; ++ i )      // 枚举所有点
+    for (int i = 1; i <= n; ++ i ) // 枚举所有点
     {
-        if (!st[i])                
+        if (!st[i])
         {
-            if (!dfs(i, 1))         // 染色失败相当于存在相邻的2个点染了相同的颜色
+            if (!dfs(i, 1)) // 染色失败相当于存在相邻的2个点染了相同的颜色
             {
                 flag = false;
                 break;

@@ -1,59 +1,28 @@
+// 2) 约数个数
+
 #include <iostream>
-#include <cstring>
-#include <algorithm>
+#include <unordered_map>
 
-using namespace std;
+using namespace std; 
 
-const int N = 100010, 
-int n, m;
-int h[N], e[N], w[N], ne[N], idx;
-int dist[N], st[N]; 
-
-void add(int a, int b, int c)
-{
-    e[idx] = b, w[idx] = c, ne[idx] = h[a], h[a] = idx ++ ;
-}
-
-void spfa()
-{
-    memset(dist, 0x3f, sizeof dist);
-    dist[1] = 0;
-    queue<int> q;
-    q.push(1);
-    while (q.size())
-    {
-        int t = q.front();
-        q.pop();
-        st[t] = false;
-        for (int i = h[t]; i != -1; i = ne[i])
-        {
-            int j = e[i];
-            if (dist[j] > w[i] + dist[t])
-            {
-                dist[j] = w[i] + dist[t];
-                if (!st[t])
-                {
-                    q.push(t);
-                    st[t] = true;
-                }
-            }
-        }
-    }
-    if (dist[n] == 0x3f3f3f3f) return -1;
-    else return dist[n]; 
-}
+typedef long long LL;
+const int N = 1e9 + 7;
 
 int main()
-{   
-    scanf("%d%d", &n, &m);
-    memset(h, -1, sizeof h);
-    while (m -- )
+{
+    int n; scanf("%d", &n);
+    unordered_map<LL, int> primes;
+    while (n -- )
     {
-        int a, b, c;
-        scanf("%d%d%d", &a, &b, &c);
-        add(a, b, c);
+        int x; scanf("%d", &x);
+        for (int i = 2; i <= n / i; ++ i )
+            while (x % i == 0)
+                x /= i, primes[i] ++ ;  
+        if (x > 1) primes[x] ++ ;
     }
-    if (dist[n] == 0x3f3f3f3f) puts("impossible");
-    else printf("%d\n", dist[n]);
+    
+    LL res = 1;
+    for (auto x : primes) res = (res * (x.second + 1)) % mod; 
+    cout << res << endl;
     return 0;
 }

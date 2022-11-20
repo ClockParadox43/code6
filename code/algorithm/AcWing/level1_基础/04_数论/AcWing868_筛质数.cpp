@@ -65,7 +65,7 @@ void get_primesII(int n)
 }
 
 // 线性筛
-// 核心: n 只会被最小质因子筛掉
+// 核心: 合数 n 只会被最小质因子 p[j] 筛掉
 // 因为 j 从小到大枚举所有的质数, 只会把当前 p[j] 和 i 的乘积筛掉,  
 void get_primesIII(int n)
 {
@@ -73,11 +73,8 @@ void get_primesIII(int n)
     for (int i = 2; i <= n; ++ i )
     {
         if (!st[i]) primes[cnt ++ ] = i;        
-        for (int j = 0; primes[j] <= n / i; ++ j )  // primes[j]<=n/i: 变形一下得到 primes[j]*i <= n, 把大于 n 的合数都筛了就 没啥意义了
+        for (int j = 0; primes[j] <= n / i; ++ j )  // primes[j] <= n/i: 变形一下得到 primes[j]*i <= n, 把大于 n 的合数都筛了就 没啥意义了
         {
-            // 因为 i 是合数 t 的最大因数, 那么 j 就是 i * j 的最小质因数, 因为如果 j 不是最小质因数 
-            // 那么 j 就可以作为合数拆解为多个质数, 若干质数和 i 相乘的, 那么 i 就一定不是 t 的最大因数
-            //  
             // 标记 primes[j]一定是 primes[j]*i 的最小质因子
             st[primes[j] * i] = true;
 
@@ -87,6 +84,8 @@ void get_primesIII(int n)
         }
     }
 }
+//  当 i%primes[j]!=0 时, 说明此时遍历到的 primes[j] 不是i的质因子, 那么只可能是此时的 primes[j]<i 的
+//  最小质因子, 所以 primes[j]*i 的最小质因子就是primes[j];
 
 int main()
 {

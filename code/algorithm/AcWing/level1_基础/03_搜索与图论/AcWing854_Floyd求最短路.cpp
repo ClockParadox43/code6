@@ -37,7 +37,7 @@
 
 using namespace std;
 
-int N = 210, INF = 1e9;
+const int N = 210, INF = 1e9;
 int d[N][N];
 
 int n, m, q;
@@ -70,7 +70,7 @@ int main()
         d[a][b] = min(d[a][b], w);  // 有重边那就选一条最短的
     }
 
-    foldy();
+    floyd();
 
     while (q -- )
     {

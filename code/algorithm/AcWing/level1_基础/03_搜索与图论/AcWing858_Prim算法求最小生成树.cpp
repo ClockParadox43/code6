@@ -43,7 +43,7 @@ int st[N];      // 是否被加入过集合
 int prim()
 {
     memset(dist, 0x3f, sizeof dist);
-    
+    dist[1] = 0;
     int res = 0;        // 最小生成数所有边的长度集合 
 
     // 每次循环选出一个点加入到生成树
