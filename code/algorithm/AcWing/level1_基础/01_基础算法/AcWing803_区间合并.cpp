@@ -30,6 +30,7 @@ void merge(vector<PII>& segs)
     for (auto seg : segs)     
         if (ed < seg.first)     
         {
+            // 将线段合并到不能再合并再插入
             if (st != -2e9) res.push_back({st, ed});    // 说明已经有新的区间了, 将旧的区间放入但, 不能是初始区间, 初始区间还需要再进一步合并
             st = seg.first, ed = seg.second;
         }
