@@ -42,8 +42,8 @@ int bfs(int sx, int sy)
             int a = t.x + dx[i], b = t.y + dy[i];       // 根据偏移量在原来的坐标上进行偏移
             if (a < 0 || a >= n || b < 0 || b >= m) continue;   // 处理越界, 其实不用判边界, 边界有墙
             if (st[a][b]) continue;     // 遍历过的格子不用遍历影响时间复杂度
-            if (g[t.x][t.y] >> i & 1) continue;     // 被统计的不能是墙
-            q[ ++ tt] = {a, b};
+            if (g[t.x][t.y] >> i & 1) continue;     // 不能统计墙, 全是墙直接个数字略过
+            q[ ++ tt] = {a, b};     // 进对列的是联通区域
             st[a][b] = true;
         } 
     }

@@ -30,7 +30,7 @@ void bfs(int sx, int sy)
                 if (i == t.x && j == t.y) continue;               // 自己不用看, 看自己周围的格子就行
                 if (i < 0 || i >= n || j < 0 || j >= m) continue; // 越界情况
                 if (g[i][j] == '.' || st[i][j]) continue;         // 遍历过或者不是水的情况
-                q[ ++ tt] = {i, j};                               // 有水的格子全部进了队列
+                q[ ++ tt] = {i, j};                              // 有水的格子全部进了队列
                 st[i][j] = true;
             }
     }
