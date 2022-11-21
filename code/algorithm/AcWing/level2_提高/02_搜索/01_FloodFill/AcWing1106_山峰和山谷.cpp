@@ -27,7 +27,7 @@ void bfs(int sx, int sy, bool& has_higher, bool& has_lower)
         for (int i = t.x - 1; i <= t.x + 1;  ++ i )  
             for (int j = t.y - 1; j <= t.y + 1; ++ j )
             {
-                if (i == t.x && j == t.y) continue;     // 自己不用判断
+                if (i == t.x && j == t.y) continue;     // 自己不用判断, 把自己 contniue 掉之后自己就不会进入队列
                 if (i < 0 || i >= n || j < 0 || j >= n) continue;   // 越界
                 
                 if (h[i][j] != h[t.x][t.y])   // 山脉的边界
