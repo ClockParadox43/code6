@@ -21,7 +21,7 @@ void bfs(int sx, int sy)
     int hh = 0, tt = 0;
     q[0] = {sx, sy};
     memset(pre, -1, sizeof pre);
-    pre[sx][sy] = {0, 0};           // 终点的上一个点是起点, 这有些像矩阵
+    pre[sx][sy] = {0, 0};           // 起点是唯一的, 一定是 {0,0}, {0,0} 中存的是那个点就看谁先到的{0,0}
     
     while (hh <= tt)
     {
