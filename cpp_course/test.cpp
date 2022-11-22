@@ -1,49 +1,66 @@
-
-// AcWing 154. 滑动窗口     复习
-// AcWing 843. n-皇后问题 复习
-// AcWing 844. 走迷宫 复习
-// AcWing 845. 八数码
-//  - dfs, 下标间的转换, 二维状态的存储
-
-// AcWing 846. 树的重心
-// AcWing 847. 图中点的层次
+// AcWing 851. spfa求最短路9641人打卡
+// AcWing 852. spfa判断负环8956人打卡
+// AcWing 858. Prim算法求最小生成树9251人打卡
+// AcWing 860. 染色法判定二分图
 
 #include <iostream>
-#include <queue>
-#include <unordered_map>
+#include <cstring>
+#include <algorithm>
 
 using namespace std;
 
-typedef pair<int, int> PII;
+// 收集所有边, 每次选最小的就加生成树
 
-int bfs(string start)
+const int N = 100010, M = 2 * N;
+int n, m;
+int h[N], e[M], ne[M], idx;
+int st[N];
+int q[N];
+
+void add(int a, int b)
 {
-    string end = "12345678x";
-    queue<PII> q;
-    q.push({start, 0});     // 状态和对应距离
+    e[idx] = b, ne[idx] = h[a], h[a] = idx ++ ;
+}
 
-    int dx[4] = {-1, 0, 1, 0}, dy[4] = {0, 1, 0, -1};
-    while (q.size())
+int bfs(int u, int c)
+{
+    int hh = 0, tt = 0;
+    q[0] = 1;
+
+    while (hh <= tt)
     {
-        auto t = q.front();
-        q.pop();
-        int dist = t.second;
-        
-        if (end == t.first) return dist;
-        
-        int k = f.first.find('x');      // 找 'x' 的位置
-        int x = k / 3, y = k % 3;
-        
-        for (int i = 0; i < 4; ++ i )
+        int t = q[hh ++ ];
+        for (int i = h[t]; i != -1; i = ne[i])
         {
-            int a = x + dx[i], b = y + dy[i];     // 利用偏移量进行移动
-            if (a >= 0 && a < 3 && b >= 0 && b < 3)
+            int j = e[i];
+            if (!st[j])
             {
-                swap(t[k], t[a * 3 + b]);   // 和转换后的下标交换位置
-                if (!)
+                st[j] = 3 - c;
+                q[ ++ tt] = j;
             }
-
-            
+            else if (st[j] == st[t]) return false;
         }
-    }   
+    }
+    return true;
+}
+
+int main()
+{
+    scanf("%d%d", &n, &m);
+    while (m -- )
+    {
+        int a, b; scanf("%d%d", &a, &b);
+        add(a, b), add(b, a);
+    }
+
+    int flag = true;
+    for (int i = 1; i <= n; ++ i )
+        if (!bfs(i, 1))
+        {
+            flag = false;
+            break;
+        }   
+
+    flag == true ? puts("Yes") : puts("No");
+    return 0;
 }

@@ -3,6 +3,10 @@
 // 2) 在朴素算法中找出没有用的元素
 // 3) 删除所有没用的元素, 判断是否有单调性
 
+// i - k + 1:得到的是开头的位置
+// y 总提供的模板, hh 和 tt 必须 hh < tt, 才是队列为空, hh == tt 还剩下一个数据
+// 左闭右闭, 算下标好算
+// 栈也是, 别人的栈 stack[sz ++ ] = e, top = stack[sz - 1] 这种, 属于左闭右开    
 #include <iostream>
 
 using namespace std;
@@ -21,12 +25,12 @@ int main()
     int hh = 0, tt = -1;
     for (int i = 0; i < n; ++ i ) 
     {   
-        // 判断过期下标
-        if (hh <= tt && i - k + 1 > q[hh]) ++ hh ;
+        // 判断过期下标, hh 暴力下来的也就是滑窗中最小的, 因为 tt 一直在判断更好的数字
+        if (hh <= tt && i - k + 1 > q[hh]) ++ hh ;              
         // 如果新插入的数更小, 队尾数就先出队列
         while (hh <= tt && a[q[tt]] >= a[i]) -- tt ; 
         // 要么代替之前的要么插入队尾
-        q[ ++ tt] = i; 
+        q[ ++ tt] = i;                  // t 是从 -1 开始的
         // 如果已经生成窗口
         if (i >= k - 1) printf("%d ", a[q[hh]]);
     }
