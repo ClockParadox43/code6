@@ -4,31 +4,36 @@ using namespace std;
 
 const int N = 100010;
 
-int n, k;
-int q[N];
+int n, k, a[N];
 
-int quick_sort(int l, int r, int k)
+// SL 是分界点: 快排思想是将大于 pivot 的数放右边
+//             小于 pivot 的数放左边
+//             sl(左部分数的长度), k(排序后第几小的数)
+//             如果 k 小于 sl(做部分的数一定比 pivot 小), 那就递归左边
+//             否则递归右边 
+int quickfind(int l, int r, int k) 
 {
-    if (l >= r) return q[l];
-    
-    int x = q[l], i = l - 1, j = r + 1;
-    while (i < j)
+    // 前半部分和快排完全相同
+    if (l >= r) return a[r];
+    int i = l - 1, j = r + 1, x = a[l + r >> 1];
+    while (i < j) 
     {
-        while (q[ ++ i] < x);
-        while (q[ -- j] > x);
-        if (i < j) swap(q[i], q[j]);  
-    } 
-
-    int sl = j - l + 1;
-    if (k <= sl) return quick_sort(l, j, k);
-    return quick_sort(j + 1, r, k - sl); 
+        do i++; while (a[i] < x);
+        do j--; while (a[j] > x);
+        if (i < j) swap(a[i], a[j]);
+    }
+    // 求出 SL 的长度（分界点 - 左边界 + 1）
+    int SL = j - l + 1;
+    // 情况 A
+    if (k <= SL) return quickfind(l, j, k);
+    // 情况 B
+    else return quickfind(j + 1, r, k - SL);
 }
 
-int main()
+int main() 
 {
-    scanf("%d%d", &n, &k);
-    for (int i = 0; i < n; ++ i ) scanf("%d", &q[i]);
-
-    cout << quick_sort(0, n - 1, k) << endl;
+    cin >> n >> k;
+    for (int i = 0; i < n; i++) cin >> a[i];
+    cout << quickfind(0, n - 1, k) << endl;
     return 0;
 }
