@@ -4,6 +4,9 @@ using namespace std;
 
 typedef long long LL;
 
+// 假设 4^5
+// 起始本质求的是 4^101
+// 也就是 4^(2^0), 4^(2^1), 4^(2^2) 
 int qmi(int a, int b, int p)
 {
     int ans = 1 % p; 

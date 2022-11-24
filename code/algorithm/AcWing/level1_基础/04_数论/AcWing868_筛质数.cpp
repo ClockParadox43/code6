@@ -58,8 +58,8 @@ void get_primesII(int n)
     {
         if (!st[i])
         {
-             primes[cnt ++ ] = i;
-             for (int j = i + i; j <= n; j += i) st[j] = true;
+             primes[cnt ++ ] = i;   // 选出质数
+             for (int j = i + i; j <= n; j += i) st[j] = true;  // 删除和质数有关的倍数
         }
     }
 }

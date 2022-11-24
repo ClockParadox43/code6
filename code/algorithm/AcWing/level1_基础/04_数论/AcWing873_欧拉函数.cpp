@@ -24,6 +24,7 @@ int phi(int n)
     int res = n;
     
      // 分解质因数
+     // 每次取出底数再将倍数除干净
     for (int i = 2; i <= n / i; ++ i )
         if (n % i == 0)
         {

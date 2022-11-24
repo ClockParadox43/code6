@@ -47,7 +47,9 @@ int dijkstra()
         int ver = k.second, distance = k.first;
         
         if (st[ver]) continue;
-        st[ver] = true;
+        st[ver] = true;         // 只有出队时才能保证当前点最小,一个点可能会松弛更新多次 
+                                // 只要更新出比当前点小的距离, 就会入队列 
+                                // 因为会松弛更新多次所以入队时一个点无法判断真假
 
         // 遍历该点的所有的邻点
         for (int i = h[ver]; i != -1; i = ne[i])

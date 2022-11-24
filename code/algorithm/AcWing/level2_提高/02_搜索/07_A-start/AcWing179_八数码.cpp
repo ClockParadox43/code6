@@ -77,7 +77,7 @@ string bfs(string start)
     string end = "12345678x";
     unordered_map<string, int> d;   // 距离
     priority_queue<PIS, vector<PIS>, greater<PIS>> heap;  // 小根堆, 将元素的估计终点距离从小到大排序
-    unordered_map<string, pair<string, char>> prev;     // 存储一个元素由哪种状态, 经过哪种操作得来, 跟前面几题一样
+    unordered_map<string, pair<string, char>> prev;       // 存储一个元素由哪种状态, 经过哪种操作得来, 跟前面几题一样
 
     heap.push({f(start), start}); // 加入起点
     d[start] = 0;   // 起点到起点的距离为 0
@@ -86,11 +86,12 @@ string bfs(string start)
     char oper[] = "urdl";
     int dx[4] = {-1, 0, 1, 0}, dy[4] = {0, 1, 0, -1};
 
+    // 排序是按照预估距离(当前点到终点)谁距离终点近谁在上面
     while (heap.size())
     {
-        auto t = heap.top(); 
+        auto t = heap.top();    
         heap.pop();
-        string state = t.second; // 记录
+        string state = t.second; // 记录, 真实距离(起点到当前点)
 
         if (state == end) break;
 
