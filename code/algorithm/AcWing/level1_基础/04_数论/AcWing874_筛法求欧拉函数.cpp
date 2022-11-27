@@ -20,6 +20,9 @@ bool st[N];
 //    只需将基数 N 修正为p[j]倍, 最终结果为 phi[i] * p[j]
 // 2) i % primes[j] != 0: p[j] 不是 i 的质因子, 只是p[j] * i的最小质因子, 因此不仅需要将基数 N 修正为 p[j] 倍 
 //    还需要补上 1 - 1 / p[j] 这一项, 因此最终结果 phi[i] * (p[j] - 1)
+// ϕ(i) = (1 - 1/pj)
+// 和 pj 相比, pj 多了一个 1/pj
+// ϕ(i) 比 ϕ[p[j] * i] 多出一个 p[j]
 void get_eulers(int n)
 {
     phi[1] = 1;

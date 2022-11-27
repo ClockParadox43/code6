@@ -1,50 +1,44 @@
-// 不恢复现场意味着系统帮我们来维护结点状态, 恢复现场意味着自己来维护结点的状态
 #include <iostream>
 #include <cstring>
-
 using namespace std;
 
-const int N = 110;
+const int N = 25;
 
-int n;
+int n, m;
 char g[N][N];
-int xa, ya, xb, yb;
-int dx[4] = {-1, 0, 1, 0}, dy[4] = {0, 1, 0, -1};
 bool st[N][N];
+int dx[4] = {-1, 0, 1, 0}, dy[4] = {0, 1, 0, -1};
 
-bool dfs(int x, int y)
+int dfs(int x, int y)
 {
-    if (g[x][y] == '#') return false; 
-    if (x == xb && y == yb) return true;
+    if (g[x][y] == '#') return 0;
+    int cnt = 1;
     
     st[x][y] = true;
-    
     for (int i = 0; i < 4; ++ i )
     {
         int a = x + dx[i], b = y + dy[i];
-        if (a < 0 || a >= n || b < 0 || b >= n) continue;
+        if (a < 0 || a >= n || b < 0 || b >= m) continue;
         if (st[a][b]) continue;
-        // if (g[a][b] == '#') continue;  
-        // 错误原因: 如果(x,y)一上来就是 #, 也就是说出事情况就走不通
-        //          因为只会判断周围的点, 所以这点会被忽略掉, 最多只会被其他格子扩展到的时候跳过
-        //          所以 这段判断应该加在进入函数的时候, 空降到这个格子直接返回  
-        if (dfs(a, b)) return true;
+        cnt += dfs(a, b);
     }
-
-    return false;
+    return cnt;
 }
 
 int main()
 {
-    int q; scanf("%d", &q);
-    while (q -- )
+    while (cin >> m >> n, n || m)
     {
-        scanf("%d", &n);
-        for (int i = 0; i < n; ++ i ) scanf("%s", g[i]);
-        scanf("%d%d%d%d", &xa, &ya, &xb, &yb);
+        int x = 0, y = 0;
+        for (int i = 0; i < n; ++ i ) 
+            for (int j = 0; j < m; ++ j )
+            {
+                cin >> g[i][j];
+                if (g[i][j] == '@') 
+                    x = i, y = j; 
+            }
         memset(st, 0, sizeof st);
-        if (dfs(xa, ya)) puts("YES");
-        else puts("NO");   
+        cout << dfs(x, y) << endl;
     }
     return 0;
 }
