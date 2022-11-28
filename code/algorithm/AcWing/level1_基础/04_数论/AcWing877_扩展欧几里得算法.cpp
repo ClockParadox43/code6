@@ -18,6 +18,7 @@ int exgcd(int a, int b, int &x, int &y)
     x = y1, y = x1 - a / b * y1;
     return res;
 }
+
 int main()
 {
     int q, a, b, x, y;
@@ -26,7 +27,7 @@ int main()
     {
         scanf("%d%d", &a, &b);
         exgcd(a, b, x, y);
-        printf("%d %d", x, y);
+        printf("%d %d\n", x, y);
     }
     return 0;
 }
