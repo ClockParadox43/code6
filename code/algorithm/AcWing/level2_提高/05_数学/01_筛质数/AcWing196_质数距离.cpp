@@ -80,11 +80,13 @@ int main()
         // ⌈l/p⌉ = ⌊l+p-1/p⌋ 
         for (int i = 0; i < cnt; ++ i ) 
         {
-            LL p = primes[i];
+            LL p = primes[i];   // p 找到的是质数
             for (LL j = max(p * 2, (l + p - 1) / p * p); j <= r;  j += p) 
                 st[j - l] = true;       // 因为下标差距过大所以用偏移量来存储, j += p 找到的是倍数
         }
-
+        // st[]: 倍数:true, 素数:false
+        
+        // 统计这个范围的所有质数
         // i 的范围小于质数范围 (r - l 偏移量)
         cnt = 0;
         for (int i = 0; i <= r - l; ++ i )
@@ -95,14 +97,15 @@ int main()
         if (cnt < 2) puts("There are no adjacent primes.");
         else 
         {
-            // 否则就输出答案
+            // 否则就输出答案, 一个一个枚举找到最小的质数对
             // minp:最小的一对, maxp:最大的一对
+            // 2 3 5 7
             int minp = 0, maxp = 0;
             for (int i = 0; i + 1 < cnt; ++ i )
             {
-                int d = primes[i + 1] - primes[i];      // 下一个质数减去当前质数 
-                if (d < primes[minp + 1] - primes[minp]) minp = i; // 更新最大值
-                if (d > primes[maxp + 1] - primes[maxp]) maxp = i; // 更新最小值
+                int d = primes[i + 1] - primes[i];             // 下一个质数减去当前质数 
+                if (d < primes[minp + 1] - primes[minp]) minp = i; // 遇到更小的差就替换
+                if (d > primes[maxp + 1] - primes[maxp]) maxp = i; // 遇到更大的差就替换
             }
 
             printf("%d,%d are closest, %d,%d are most distant.\n",
