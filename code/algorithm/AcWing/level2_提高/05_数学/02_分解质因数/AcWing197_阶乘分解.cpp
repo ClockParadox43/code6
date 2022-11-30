@@ -45,7 +45,7 @@ int main()
         int p = primes[i]; 
         int s = 0;
         for (int j = n; j; j /= p) s += j / p;  // 挑出所有和该质因子有关的倍数
-        printf("%d %d", p, s);
+        printf("%d %d\n", p, s);
     }    
 
     return 0;
