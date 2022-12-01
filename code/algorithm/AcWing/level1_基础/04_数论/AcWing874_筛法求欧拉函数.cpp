@@ -16,8 +16,8 @@ bool st[N];
 //
 // 质数 i 的欧拉函数即为 phi[i] = i - 1 -> 1 ~ i−1 均与 i 互质, 共i−1个
 // phi[primes[j] * i] 分为两种情况: 
-// 1) i % primes[j] == 0时: p[j]是i的最小质因子, 也是 p[j] * i 的最小质因子, 因此1 - 1 / p[j]这一项在phi[i]中计算过了 
-//    只需将基数 N 修正为p[j]倍, 最终结果为 phi[i] * p[j]
+// 1) i % primes[j] == 0时: p[j] 是 i 的最小质因子, 也是 p[j] * i 的最小质因子, 因此 1 - 1 / p[j] 这一项在 phi[i] 中计算过了 
+//    只需将基数 N 修正为 p[j] 倍, 最终结果为 phi[i] * p[j]
 // 2) i % primes[j] != 0: p[j] 不是 i 的质因子, 只是p[j] * i的最小质因子, 因此不仅需要将基数 N 修正为 p[j] 倍 
 //    还需要补上 1 - 1 / p[j] 这一项, 因此最终结果 phi[i] * (p[j] - 1)
 // ϕ(i) = (1 - 1/pj)
@@ -39,7 +39,7 @@ void get_eulers(int n)
             st[primes[j] * i] = true;
             if (i % primes[j] == 0) 
             {
-                phi[primes[j] * i] = phi[i] * primes[j];
+                phi[primes[j] * i] = phi[i] * primes[j];  // phi[p[j]*i] 的最小质因子, 在之前的基础上相乘
                 break;
             }
             phi[primes[j] * i] = phi[i] * (primes[j] - 1);
