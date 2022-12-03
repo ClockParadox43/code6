@@ -74,3 +74,71 @@
 //      承接上文, 只需让 k₁, k₂ 分别扩大 y 倍, 则可以找到一个 k₁, k₂ 满足 (1) 式
 //      k₁ = k₁'· y, k₂ = k₂'· y
 //
+
+#include <iostream>
+
+using namespace std;
+
+typedef long long LL;
+
+// 扩展欧几里得求 ax+by=gcd(a,b) 的解
+LL exgcd(LL a, LL b, LL &x, LL &y)
+{
+    if(b == 0)
+    {
+        x = 1, y = 0;
+        return a;
+    }
+    LL x1, y1, gcd = exgcd(b, a%b, x1, y1);
+    x = y1, y = x1 - a / b * y1;
+    return gcd;
+}
+
+int main()
+{
+    int n, has_ans = 1; scanf("%d", &n);
+    LL a1, m1, t; scanf("%lld%lld", &a1, &m1); // 第一个方程的系数, 备份数据 \ 输入第一个方程
+    
+    // 1) 得到 x₁ = k₁·a₁+m₁, x₂ = k₂·a₂+m₂ => k₁·a₁ + (-k₂)·a₂ = m₂ - m₁ 
+
+    for (int i = 2, a2, m2; i <= n; ++ i )  // 拼凑接下来的 n-1 个方程
+    {
+        scanf("%d%d", &a2, &m2);
+        LL k01, k02, d = exgcd(a1, a2, k01, k02);  // 2) 利用扩展欧几里得到该方程的 k₁, k₂
+
+        // 设 k₀₁, k₀₂ 为 a₁·k₀₁ + a₂·k₀₂ = gcd(a₁, a₂) 方程的解, 则 gcd(a1,a2)|m₂ - m₁ 时方程有解
+        // gcd(a₁, a₂) 记作 d, 求出通解将通解代入原方程
+        // k₁ = k₀₁·(m₂-m₁)/d + k·(a₂/d)
+        // k₂ = k₀₂·(m₂-m₁)/d + k·(a₁/d)
+        // ps:为了防止溢出, 则需要在通解 k₁ 中选出一个尽可能小的特解 k₀₁, 此处为取最小正整数特解
+        //    令 k₀₁ = k₀₁·(m₂-m₁)/d
+        //    则最小正整数特解为:
+        //         - k₀₁ = (k₀₁ % d + a₂ + d) % a₂ / d
+        if ((m2 - m1) % d)  // 此时无解
+        {
+            has_ans = 0;
+            break;
+        }
+
+        k01 = k01 * (m2 - m1) / d;  // 特解
+        k01 = (k01 % (a2 / d) + a2 / d) % (a2 / d);   // 让特解 k₀₁ 取得最小正整数解
+
+        // 将 k₁ 代入 x₁ = k₁·a₁+m₁
+        // k₁ = k₀₁·(m₂-m₁)/d + k·(a₂/d)
+        // k₀₁ = k₀₁·(m₂-m₁)/d              ps:看做一个整体
+        // 
+        // x = a₁(k₀₁·(m₂-m₁)/d + k·(a₂/d)) + m₁
+        //   = a₁·k₀₁·(m₂-m₁)/d + k·a₁a₂/d + m₁
+        //   = a₁·k₀₁·(m₂-m₁)/d + k·[a₁,a₂] + m₁
+        // 
+        // 
+        // a = a₁a₂/d
+        // m = k₁a₂ + m₁
+        t = a1 * a2 / d;        // a₁a₂/(a₁, a₂) = [a₁, a₂]
+        m1 = a1 * k01 + m1;     // m = a₁ + k₀₁ + m₁
+        a1 = t;
+    }
+    if (has_ans) printf("%lld", (m1 % a1 + a1) % a1);
+    else printf("%d\n", -1);
+    return 0;
+}
