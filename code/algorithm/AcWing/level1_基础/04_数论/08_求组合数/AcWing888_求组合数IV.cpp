@@ -69,7 +69,6 @@ int main()
     get_primes(a);
     
     // 求每个质数的次数
-    // 
     for (int i = 0; i < cnt; ++ i )
     {
         int p = primes[i];
@@ -79,6 +78,7 @@ int main()
     vector<int> res;
     res.push_back(1);
 
+    // 每个质数累乘上自己对应次数
     for (int i = 0; i < cnt; ++ i )
         for (int j = 0; j < sum[i]; ++ j )
             res = mul(res, primes[i]);
