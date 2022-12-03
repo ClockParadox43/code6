@@ -29,6 +29,9 @@ int quick_pow(int a, int k, int p)
     return res;
 }
 
+// 利用快速幂
+// C(a,b) = a!/b!(a-b)! = a!* b!⁻¹*(a-b)!⁻¹
+// b!⁻¹ 和 (a-b)!⁻¹ 用逆元求
 int main()
 {
     int n; scanf("%d", &n);
@@ -37,9 +40,10 @@ int main()
     for (int i = 1; i <= 1e5; ++ i )
     {
         fac[i] = fac[i - 1] * i % mod;  // 求阶乘
-        infac[i] = (LL)infac[i - 1] * quick_pow(i, mod - 2, mod) % mod; // 求逆元
+        infac[i] = (LL)infac[i - 1] * quick_pow(i, mod - 2, mod) % mod; // 求每个数对应的逆元
     }
 
+    // 查询 a!* b!⁻¹*(a-b)!⁻¹
     while (n -- )
     {
         int a, b; scanf("%d%d", &a, &b);
