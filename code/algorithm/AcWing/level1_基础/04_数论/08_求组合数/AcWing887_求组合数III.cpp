@@ -31,6 +31,8 @@
 // 我们让 a, b 在 p 进制中右移一位, 即 ⌊a/p⌋, ⌊b/p⌋
 // 对于 a/p⌋, ⌊b/p⌋ 重复上面最开始的步骤, 可以得到 C(⌊a/p⌋, ⌊b/p⌋) ≡ C(ak,bk) · C(ak-1, bk-1)·…·C(a1,b1) (modp)
 // 因此: C(a,b) ≡  C(⌊a/p⌋, ⌊b/p⌋) · C(a mod p, b mod p) (mod p) 
+// 公式推导: https://zhuanlan.zhihu.com/p/452976974 
+
 #include <iostream>
 #include <algorithm>
 
