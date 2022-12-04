@@ -27,7 +27,7 @@
 // 通解: x = x₀ + k(a/d), y = y₀ + k(b/d)
 // 因为余数等于 1, 所以满足 x₀ + k(a/d) 必然不等于 0 
 // ps:如果 x 等于 0, 0 乘任何数都是 0, ax = 0, ax % b 必然没有余数
-
+// 然后, 满足 x₀ + k(a/d) 这种形式的正整数解就是 x % b  
 #include <iostream>
 
 using namespace std;
