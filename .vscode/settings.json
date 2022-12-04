@@ -64,6 +64,7 @@
         "xtr1common": "cpp",
         "xutility": "cpp",
         "stack": "cpp",
-        "acwing859_kruskal算法求最小生成树": "cpp"
+        "acwing859_kruskal算法求最小生成树": "cpp",
+        "unordered_set": "cpp"
     }
 }
