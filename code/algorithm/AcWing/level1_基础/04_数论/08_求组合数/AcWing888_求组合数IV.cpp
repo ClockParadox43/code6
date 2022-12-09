@@ -1,5 +1,8 @@
 // 先把 Cab 分解质因数, 这样就可以将它变成一个只有乘法的形式(分解质因数后再计算 a!), 这样之后只需要实现一个高精度乘法即可
 // 如何求一个阶乘当中包含多少个因子 p : a! = ⌊a/p⌋ + ⌊a/p²⌋ + ⌊a/p³⌋ ... (直到 p^n > a)
+//                                         ^
+//                                        ||
+//                                  得到 p 倍数的个数
 // ⌊a/p⌋ 表示: 1~a 当中 p 的倍数的个数 
 //                         
 // 1) 先预处理出所有质因子, 求出质因子的次数是多少
@@ -31,6 +34,7 @@ void get_primes(int n)
 }
 
 // 对 p 的各个小于等于 a 的次数向下取整倍数
+// 求 a^p: p 出现的次数 
 int get(int n, int p)
 {
     // 求 n! 中 p 的个数
@@ -68,20 +72,22 @@ int main()
     int a, b; scanf("%d%d", &a, &b);
     get_primes(a);
     
-    // 求每个质数的次数
+    // 求每个质数的次数: a!/b!(a-b)!
     for (int i = 0; i < cnt; ++ i )
     {
         int p = primes[i];
         sum[i] = get(a, p) - get(a - b, p) - get(b, p);     // 求出当前这个数中包含的 p 的次数是多少
-    }                                                       // 数据范围: 1≤b≤a≤5000, a 是大于 b 的, 所以只需要求 a 就可以了, 这样b, a−b 都出来了
+    }                                                       // 数据范围: 1≤b≤a≤5000, a 是大于 b 的, 所以只需要求 a 就可以了, 这样 b, a−b 都出来了
 
     vector<int> res;
     res.push_back(1);
 
-    // 每个质数累乘上自己对应次数
+    // 6 = 2^1 * 3^1
+    // 外层循环:所有数之间累乘
+    // 内层循环:每个质数累乘上自己对应次数
     for (int i = 0; i < cnt; ++ i )
         for (int j = 0; j < sum[i]; ++ j )
-            res = mul(res, primes[i]);
+            res = mul(res, primes[i]);          // res 和 p[i] 相乘后返回一个新的
 
     for (int i = res.size() - 1; i >= 0; -- i ) printf("%d", res[i]);
     puts("");
