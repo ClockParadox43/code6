@@ -91,8 +91,8 @@
         // cross(v, w) == 0 则两直线平行或重合
         Point get_line_intersection(Point p, Vector v, Point q, vector w)
         {
-            vector u = p - q;       // 求出辅助线的距离
-            double t = cross(w, u) / cross(v, w);   // 求出两个三角形的比值
+            vector u = p - q;       // 一个点的距离减另一个点的距离, 求出辅助线的距离
+            double t = cross(w, u) / cross(v, w);   // 因为相似, 求出两个三角形的比值
             return p + v * t;                       // p 到焦点的距离就是 t 倍的 向量v
         }
 

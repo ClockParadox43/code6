@@ -80,7 +80,7 @@ double andrew()
     }
 
     double res = 0;
-    for (int i = 2; i <= top; ++ i )
+    for (int i = 2; i <= top; ++ i )        // 和从 0 开始等价(那牛那道题)
         res += get_dist(q[stk[i - 1]], q[stk[i]]);
     return res; 
 }
