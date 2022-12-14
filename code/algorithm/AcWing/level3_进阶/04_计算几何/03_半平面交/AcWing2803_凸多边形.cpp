@@ -76,7 +76,7 @@ double area(PDD a, PDD b, PDD c)
 // PDD{x,y}:存储的是直线的端点坐标
 PDD get_line_intersection(PDD p, PDD v, PDD q, PDD w)
 {   
-    auto u = p - q;     // 一个坐标的距离减去一个坐标的距离, 求出辅助线的距离
+    auto u = p - q;     // 一个坐标的距离减去一个坐标的距离, 求出辅助线
     double t = cross(w, u) / cross(v, w); // 因为相似, 所以可求出两个三角形的比值
     return {p.x + v.x * t, p.y + v.y * t}; // pv这条线段, 到焦点的距离就是 t 倍的 向量v
 }
@@ -119,7 +119,7 @@ bool on_right(Line& a, Line& b, Line& c)
     //    \   |     /
     //     \  |    /
     // _____\_|___/_____
-    //       .| .        => 如果交点在 "新线段" 右侧, 就踢掉
+    //       .| .       => 如果交点在 "新线段" 右侧, 就踢掉
     //
     // a.st 是原点(当前点)
     // "队尾" 和 "次队尾线段" 交点o 求出后, 判断的就是 "点o" 到 "a.st" 的距离 和 "a.ed" 到 "a.st" 的距离
