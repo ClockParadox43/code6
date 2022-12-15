@@ -120,7 +120,7 @@ void half_plane_intersection()
 
     int k = 0;
     for (int i = hh; i <= tt; i ++ )  // 枚举队列中的所有直线
-        for (auto id: line[q[i]].ids)
+        for (auto id: line[q[i]].ids) // 遍历第 i 个 line[] 中的 数组
             ans[k ++ ] = id;          // 将直线所在赛车编号存入 ans 数组
     sort(ans, ans + k);               // 题目要求升序返回
 
