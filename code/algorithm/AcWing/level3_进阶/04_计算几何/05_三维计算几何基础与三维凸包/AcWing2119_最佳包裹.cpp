@@ -78,7 +78,7 @@ struct Plane
 
     bool above(Point a)   // 判断点在上方还是在下方
     {
-        return ((a - q[v[0]]) & norm()) >= 0;      // 一个点乘上法向量判断是否大于等于 0
+        return ((a - q[v[0]]) & norm()) >= 0;      // 平面上任意取一点 点乘上法向量判断是否大于等于 0
     }
 }plane[N], np[N];   // np[]: 备份数组
 
@@ -137,24 +137,3 @@ int main()
 
     return 0;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
