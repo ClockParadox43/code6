@@ -102,7 +102,6 @@ int main()
         a[x] += item.second;
     }
 
-    
     // 预处理前缀和, 处理离散化的下标, 再这些区间中生成前缀和, 大范围变成了小范围
     for (int i = 1; i <= alls.size(); ++ i ) s[i] = s[i - 1] + a[i];
 
