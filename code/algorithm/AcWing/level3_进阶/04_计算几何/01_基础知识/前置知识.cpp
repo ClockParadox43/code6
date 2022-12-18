@@ -59,7 +59,8 @@
         
         3.4.2 计算向量夹角
         ∵ 向量A·向量B = |向量A||向量B|cos(θ)
-        ∴ cos(θ) = acos(向量A·向量B / |向量A||向量B|)
+        ∴ cos(θ) = 向量A·向量B / |向量A||向量B|
+        ∴ θ = acos(向量A·向量B / |向量A||向量B|)
         double get_angle(Point a, Point b)
         {
             return acos(dot(A, B) / get_length(a) / get_length(b)); 
@@ -126,7 +127,7 @@
         (6) 点是否在线段上
         bool on_segment(Point p, Point a, Point b)
         {
-            return sign(cross(p - a, p - b)) == 0 && sign(dot(p - a, p - b)) <= 0;  // 保证共线或者不是在 p 的左边或者右边 (也就是反向在 pa 内部)
+            return sign(cross(p - a, p - b)) == 0 && sign(dot(p - a, p - b)) <= 0;  // 保证共线且不是在 p 的左边或者右边 (也就是反向在 pa 内部)
         }
 
         (7) 判断两线段是否相交
