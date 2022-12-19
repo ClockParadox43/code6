@@ -56,13 +56,13 @@ double operator& (PDD a, PDD b)
     return a.x * b.x + a.y * b.y;
 }
 
-// 是否在选段上
+// 判断是否在线段上(需要点积)
 bool on_segment(PDD p, PDD a, PDD b)
 {
     return sign((p - a) & (p - b)) <= 0;
 }
 
-// 如果在线段上就返回 INF, 如果不在就返回 o
+// 如果在线段上就返回 INF, 如果不在就返回 o (需要叉积)
 PDD get_line_intersection(PDD p, PDD v, PDD q, PDD w)
 {
     if (!sign(v * w)) return {INF, INF};

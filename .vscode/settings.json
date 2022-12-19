@@ -67,6 +67,8 @@
         "acwing859_kruskal算法求最小生成树": "cpp",
         "unordered_set": "cpp",
         "complex": "cpp",
-        "valarray": "cpp"
+        "valarray": "cpp",
+        "chrono": "cpp",
+        "format": "cpp"
     }
 }
