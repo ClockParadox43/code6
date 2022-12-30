@@ -1,35 +1,30 @@
-// 用 * 构造一个对角线长 5 个字符，倾斜放置的菱形
-//
-//   *    1
-//  ***   3   j <= 2*i + 1
-// *****  5
-//  ***    
-//   *
-
 #include <iostream>
+#include <algorithm>
 
 using namespace std;
 
-void print()
-{
-    for (int i = 0; i < 3; ++ i )
-    {
-        for (int j = 2; j >= i; -- j )
-            printf(" ");
-        for (int j = 1; j <= 2 * i + 1; ++ j )
-            printf("*");
-    
-        cout << endl;
-    }
-    
-    for (int i = 0; i < 2; ++ i )
-    {
-        for (int j = )
-    }
-}
 
 int main()
 {
-    print();
+    string a("-280"); 
+    while (a.size() > 1 && a[a.size() - 1] == '0') a.pop_back();
+    
+    if (a[0] == '-')
+    {
+        int l = 1, r = a.size() - 1; 
+        while (l < r)
+        {
+            swap(a[l], a[r]);
+            l++, r--;
+        }
+        cout << a;
+    }
+    else
+    {
+        // 380, 83    
+        reverse(a.begin(), a.end());
+        cout << a;
+    }
+    
     return 0;
 }

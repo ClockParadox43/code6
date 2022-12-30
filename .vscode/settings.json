@@ -69,6 +69,9 @@
         "complex": "cpp",
         "valarray": "cpp",
         "chrono": "cpp",
-        "format": "cpp"
+        "format": "cpp",
+        "bitset": "cpp",
+        "regex": "cpp",
+        "xtree": "cpp"
     }
 }

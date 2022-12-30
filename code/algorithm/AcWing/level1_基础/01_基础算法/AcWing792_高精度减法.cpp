@@ -11,13 +11,13 @@ bool cmp(vector<int> &A, vector<int> & B)
 {
     if (A.size() != B.size()) return A.size() > B.size();
     for (int i = A.size() - 1; i >= 0; -- i ) 
-    {
         if (A[i] != B[i]) return A[i] > B[i];
-    }
-    
     return true;
 }
 
+// 123
+// 100
+// 023 
 vector<int> sub(vector<int>& A, vector<int>& B)
 {
     vector<int> C;
@@ -47,7 +47,7 @@ int main()
     if (cmp(A, B))
     {
         vector<int> C = sub(A, B);
-        for (int i = C.size() - 1; i >= 0; -- i ) cout << C[i] ;
+        for (int i = C.size() - 1; i >= 0; -- i ) cout << C[i];
     }
     else 
     {

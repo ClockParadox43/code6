@@ -1,4 +1,3 @@
-
 // 区间合并应用场景, 
 // 区间合并算法: 有很多区间, 快速将有交集的区间合并起来
 //
@@ -8,6 +7,7 @@
 // 3) 如果没有重合, 加入新的线段
 //
 // ps: 每个线段是是先合并再 push_back()
+
 #include <iostream>
 #include <algorithm>
 #include <vector>

@@ -21,7 +21,7 @@ int main()
         while (l < r)
         {
             int m = l + r >> 1;
-            if (q[m] >= x) r = m;
+            if (q[m] >= x) r = m;       // 如果中位数更大, 那么 x 就在中位数左边, 所以 r 二分过来 
             else l = m + 1;
         }
         
