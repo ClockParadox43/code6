@@ -3,7 +3,7 @@
 
 using namespace std;
 
-bool st[1005][1005];
+bool a[1005][1005];
 
 int ans; 
 
@@ -27,7 +27,7 @@ int main()
         int ans = 0;
         for (int j = 1; j <= m; ++ j )  // 枚举恰好有空的日子
             if (a[i][j]) ++ ans;
-        cout << ans;
+        cout << ans << " ";
     }
     
     return 0;

@@ -5,6 +5,7 @@ using namespace std;
 const int N = 100010;
 
 int a[N], s[N];
+// s[] 记录 a[i] 出现的次数
 
 int main()
 {
@@ -24,7 +25,7 @@ int main()
             s[a[j]] -- ;
             ++ j;               // 每次判断完后会再往后走一各, 所以是左闭右闭
         }
-        ans = ans > (i  - j  + 1) ? ans : (i - j + 1);
+        ans = ans > (i - j + 1) ? ans : (i - j + 1);
     }
     
     printf("%d", ans);

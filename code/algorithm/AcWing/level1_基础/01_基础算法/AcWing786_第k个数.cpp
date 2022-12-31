@@ -22,13 +22,16 @@ int quickfind(int l, int r, int k)
         do j--; while (a[j] > x);
         if (i < j) swap(a[i], a[j]);
     }
-    // 求出 SL 的长度（分界点 - 左边界 + 1）
+    // 求出 SL 的长度 (分界点 - 左边界 + 1)
+    // SL:排序后左半部分的长度
     int SL = j - l + 1;
-    // 情况 A
+    // 情况 A: 要找的数在左半部分
     if (k <= SL) return quickfind(l, j, k);
-    // 情况 B
+    // 情况 B: 要找的数在右半部分
     else return quickfind(j + 1, r, k - SL);
 }
+// 没明白值和排序后下标的关系
+
 
 int main() 
 {

@@ -1,30 +1,27 @@
 #include <iostream>
-#include <algorithm>
 
 using namespace std;
 
-
 int main()
 {
-    string a("-280"); 
-    while (a.size() > 1 && a[a.size() - 1] == '0') a.pop_back();
-    
-    if (a[0] == '-')
+    int n, m, x; scanf("%d%d%d", &x, &m, &x);
+    for (int i = 0; i < n; ++ i ) scanf("%d", &q[i]);
+    while (q -- )
     {
-        int l = 1, r = a.size() - 1; 
-        while (l < r)
+        bool flag = false;
+        int l, r; scanf("%d%d", &l, &r);
+        for (int i = l; i <= r; ++ i )
         {
-            swap(a[l], a[r]);
-            l++, r--;
+            for (int j = i + 1; j <= r; ++ j )
+                if (q[i] ^ q[j] == x) 
+                {
+                    flag = true;
+                    puts("Yes");
+                    break;
+                }
+            if (flag) break;
         }
-        cout << a;
+        if (!flag) puts("No");
     }
-    else
-    {
-        // 380, 83    
-        reverse(a.begin(), a.end());
-        cout << a;
-    }
-    
     return 0;
 }

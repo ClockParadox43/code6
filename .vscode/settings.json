@@ -72,6 +72,7 @@
         "format": "cpp",
         "bitset": "cpp",
         "regex": "cpp",
-        "xtree": "cpp"
+        "xtree": "cpp",
+        "filesystem": "cpp"
     }
 }
