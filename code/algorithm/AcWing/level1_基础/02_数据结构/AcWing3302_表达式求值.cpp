@@ -35,13 +35,14 @@ int main()
         if (isdigit(c))     // 如果当前是数字
         {
             int x = 0, j = i;
+            // 字符串变数字
             while (j < str.size() && isdigit(str[j]))
                 x = x * 10 + str[j++] - '0';
-            i = j - 1;         // i 顺势来到操作符的位置
+            i = j - 1;         // 出了花括号后, 因为还会 for 循环还会加一, 所以减 1
             num.push(x);       // 数字入栈
         }
         else if (c == '(') op.push(c);      // 如果是左括号直接将做括号入栈, 直到遇到右括号为止
-        else if (c == ')')  // 找到收括号就结算当前数
+        else if (c == ')')      // 找到收括号就结算当前数
         {
             while (op.top() != '(') eval();
             op.pop();           // 弹出左括号

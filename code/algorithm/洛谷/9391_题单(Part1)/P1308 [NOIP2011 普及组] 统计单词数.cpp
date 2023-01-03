@@ -16,7 +16,7 @@ int main()
     // s[]:要找的文章, w[]:要找的单词
     // p 和 q 是指针, 分别代表当前搜索到什么地方和最后一次找到的单词指针
     char s[1000005], w[15], *p, *q;
-    gets(w), get(s);
+    gets(w), gets(s);
     strlow(w), strlow(s);       // 小写
     
     bool flag = false;      //  判断是否找到

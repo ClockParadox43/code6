@@ -30,6 +30,7 @@ const int N = 100010;
 int n;
 int w[N];
 
+// 相邻两堆能合并, 每段是否可以平均分为 cnt
 bool check(int cnt)
 {
     // 相当于自动处理某一堆数量为 0 的情况
