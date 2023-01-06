@@ -21,13 +21,19 @@ void insert(char* str)
     for (int i = 0; str[i]; ++ i )
     {
         int u = str[i] - 'a';                           // 算出要映射的位置 0~25
-        if (!son[p][u]) son[p][u] = ++ idx ;            // 注意是当前第 p 层, 如果不存在该节点, 创建出一个新的, ++ idx 可以让 p 直接往下跳
+        
+        // 注意是当前第 p 层, 如果不存在该节点, 创建出一个新的
+        // ++ idx 可以让 p 直接往下跳(如果是 idx ++ , p 就不会来到下一层)
+        // 当前层的 son[p,u] 存储的 idx 是下一层的
+        if (!son[p][u]) son[p][u] = ++ idx;            
+        
         p = son[p][u];                                  // 因为 son 里面存的是 idx, 所以 p = son[p, u] 可以来到之前出现过的节点, 像一种映射
     }
     cnt[p] ++ ;                 // 如果这个 idx 没有被记录过就 ++ 
 }
 
 // 没有该字符会返回 0, 如果是子串且不存在, 那么就不会记录以这个单词 idx
+// 通过字符对应到 idx
 int query(char* str)
 {
     int p = 0;

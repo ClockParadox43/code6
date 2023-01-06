@@ -25,7 +25,7 @@
 // 
 // 类似问题: 有飞往 1~N 点的飞机, 每一次换乘, 乘客的心情都会下降, 求 1~N 的距离  
 // 
-// bellman_ford: 每次循环暴力枚举每一条边
+// bellman_ford: 每次循环暴力枚举每一条边, dist[i] 表示从 dist[1]~dist[i] 的最短距离
 #include <iostream>
 #include <cstring>
 #include <algorithm>
@@ -62,8 +62,8 @@ struct Edge
 // 1 -> 2 -> 3
 //  \   | 1 
 // 3 \  v
-//      3
-
+//      
+        
 void bellman_ford()
 {
     memset(dist, 0x3f, sizeof dist);
@@ -74,9 +74,14 @@ void bellman_ford()
     {
         // 每次在新的迭代前, 备份一下 dist 数组 -> backup
         memcpy(backup, dist, sizeof dist);
+        // ps:没有更新到的全是 INF
         for (int j = 0; j < m; ++ j )
         {
             // edges[i]:第 i 条边
+            // 情况1: a 被更新到, 表示 1~a 的距离
+            // 情况2: a 没有被更新到, a 是 INF
+            //          - b 被更新到, b 保持最小
+            //          - b 没有被更新到, 那么 a + w 一定更大, b 依旧保持 INF
             int a = edges[j].a, b = edges[j].b, w = edges[j].w;
             // dist[b]: 1~b 的距离, backup[a] + w: a~b 的权重, 取最小 
             dist[b] = min(dist[b], backup[a] + w);

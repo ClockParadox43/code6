@@ -1,5 +1,5 @@
 // 思路
-// 堆优化版的dijkstra是对朴素版dijkstra进行了优化, 在朴素版dijkstra中时间复杂度最高的寻找距离
+// 堆优化版的 dijkstra 是对朴素版 dijkstra 进行了优化, 在朴素版dijkstra中时间复杂度最高的寻找距离
 // 最短的点O(n^2)可以使用最小堆优化
 // 1) 一号点的距离初始化为零, 其他点初始化成无穷大
 // 2) 将一号点放入堆中
@@ -29,16 +29,17 @@ void add(int a, int b, int c)
     e[idx] = b, w[idx] = c, ne[idx] = h[a], h[a] = idx ++ ;
 }
 
+// 每次都是用最短点去更新其他点, 然后接着用最短点去更新
 int dijkstra()
-{
+{ 
     memset(dist, 0x3f, sizeof dist);
     dist[1] = 0;
     // 因为是小根堆, 所以每次更新完邻点后, 最小的那个邻点会浮在面
     priority_queue<PII, vector<PII>, greater<PII>> heap; 
 
-    // 这里heap中为什么要存pair呢, 首先小根堆是根据距离来排的, 所以有一个变量要是距离
+    // 这里 heap 中为什么要存 pair 呢, 首先小根堆是根据距离来排的, 所以有一个变量要是距离
     // 其次在从堆中拿出来的时候要知道知道这个点是哪个点, 不然怎么更新邻接点呢? 所以第二个变量要存点
-    // 这个顺序不能倒，pair排序时是先根据first，再根据second，这里显然要根据距离排序
+    // 这个顺序不能倒，pair 排序时是先根据 first，再根据 second，这里显然要根据距离排序
     heap.push({ 0, 1 }); 
     while (heap.size())
     {
@@ -46,10 +47,12 @@ int dijkstra()
         heap.pop();
         int ver = k.second, distance = k.first;
         
-        if (st[ver]) continue;
-        st[ver] = true;         // 只有出队时才能保证当前点最小,一个点可能会松弛更新多次 
-                                // 只要更新出比当前点小的距离, 就会入队列 
-                                // 因为会松弛更新多次所以入队时一个点无法判断真假
+        if (st[ver]) continue;  
+        st[ver] = true;         
+        // 先出来的点会被优先标记上, 别的点连接自己的距离可能更长, 短的优先被标记就轮不到别的点了
+        // 只有出队时才能保证当前点最小,一个点可能会松弛更新多次 
+        // 只要更新出比当前点小的距离, 就会入队列 
+        // 因为会松弛更新多次所以入队时一个点无法判断真假
 
         // 遍历该点的所有的邻点
         for (int i = h[ver]; i != -1; i = ne[i])

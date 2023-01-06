@@ -12,6 +12,7 @@
 // 
 // 用确定的点来更新待定点的最短距离
 // 如果 n 是 10^5 两层循环就是 10^10, 就会超时
+// 思想:每次都是用当前最短去更新自己到别的点的距离
 #include <iostream>
 #include <cstring>
 #include <algorithm>
@@ -47,7 +48,7 @@ int dijkstra()
     
         st[t] = true;       // t 已经确定为最
         
-        // 选出来的 t 去更新到各个点更短的距离, g[t][j]: t~j 的距离
+        // 选出来的 t 去更新到各个点更短的距离, g[t][j]: t~j 的距离, dist[t]: 1~t 的距离
         // j 代表 0~j 号点的距离
         for (int j = 1; j <= n; ++ j )
             dist[j] = min(dist[j], dist[t] + g[t][j]);

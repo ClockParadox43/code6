@@ -5,7 +5,7 @@
 // belong[x] = a : x 属于 a 这个集合
 // 
 // 基本原理: 每个集合用一棵树来表示, 树根的编号就是整个集合的编号, 每个
-//		     节点存储它的父节点, p[x] 表示 x 的父节点
+//		    节点存储它的父节点, p[x] 表示 x 的父节点
 
 #include <iostream>
 
@@ -27,7 +27,7 @@ int find(int x)
 int main()
 {
     scanf("%d%d", &n, &q);
-    for (int i = 0; i <= n; ++ i ) p[i] = i;
+    for (int i = 0; i <= n; ++ i ) p[i] = i;    // 初始化
 
     while (q -- )
     {

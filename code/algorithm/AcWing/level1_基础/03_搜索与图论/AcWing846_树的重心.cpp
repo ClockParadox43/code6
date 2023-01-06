@@ -23,10 +23,14 @@ bool st[N];
 int ans = N;
 // 插入一条 a->b 的边
 // 在 a 所对应的邻接表中插入节点 b 
+// h[a] 代表: a 这个槽指向的自己集合的最后一个节点的 idx 号
 void add(int a, int b)
 {
     e[idx] = b, ne[idx] = h[a], h[a] = idx ++ ; 
 }
+
+// 思路: 通过当前树的子树, 获得联通块的数量, 再将自己作为子树返回
+//       父节点就能算出联通块的数量
 
 // 返回已 u 为根的子树中的数量
 // 全局变量 ans 记录答案
@@ -50,7 +54,10 @@ int dfs(int u)
         }
     }
 
-    res = max(res, n - sum); // 当前树和上面子树求最大
+    res = max(res, n - sum); // 当前树和上面子树求最大(除了自己以外), n-sum:剩下的联通中节点的数量
+    
+    // 此时已经求出最大联通块
+    
     ans = min(ans, res);     // 求联通块最小
     return sum;              // 返回以自己为头的子树数量
 }
@@ -68,6 +75,8 @@ int main()
         scanf("%d%d", &a, &b);
         add(a, b), add(b, a);
     }
+
+    // ps:此处的节点编号是从 1 开始的
     dfs(1);
     printf("%d", ans);
 

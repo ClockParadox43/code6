@@ -9,6 +9,7 @@ using namespace std;
 stack<int> num;
 stack<char> op;
 
+// 思想:优先级大或相等的为一组, 一对括号为一组 即 碰到优先级小的就结算 
 // 用末尾的运算符操作末尾的两个数
 void eval()
 {
@@ -47,7 +48,7 @@ int main()
             while (op.top() != '(') eval();
             op.pop();           // 弹出左括号
         }
-        else        // 碰到运算符情况
+        else        // 出现运算符, 只要当前运算符优先级('+') 小于等于 栈顶运算符优先级('*')就能立刻 结算
         {
             // 如果栈是不空的 且 栈顶元素优先级大于等于当前元素的优先级 且栈顶不是左括号
             while (op.size() && op.top() != '(' && pr[op.top()] >= pr[c]) 

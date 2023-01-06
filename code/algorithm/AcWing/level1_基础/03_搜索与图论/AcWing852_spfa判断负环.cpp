@@ -16,7 +16,6 @@
 #include <cstring>
 
 using namespace std;
-
 const int N = 2010, M = 10010;
 
 int n, m;

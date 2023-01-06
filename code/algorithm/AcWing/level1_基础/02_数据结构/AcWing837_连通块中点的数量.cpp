@@ -12,7 +12,7 @@ int p[N], _size[N];
 
 int find(int x)
 {
-    if (p[x] != x) x = find(p[x]);
+    if (p[x] != x) p[x] = find(p[x]);
     return p[x];
 }
 
@@ -20,8 +20,11 @@ void _union(int a, int b)
 {
     if (find(a) != find(b))           // 不属于同一个集合才需要合并
     {
-        _size[find(b)] += _size[find(a)];  // a 的 size 合并进 b 
-        p[find(a)] = find(b);            // a 的祖宗节点指向 b 的祖宗节点 
+        // a 的 size 合并进 b
+        // ps:要合并 sz, 再指向新的祖宗节点
+        //    如果先指向祖宗节点会导致找到同一个父亲, sz[] 加入的 sz[] 就是自己的 sz
+        _size[find(b)] += _size[find(a)];  
+        p[find(a)] = find(b);              // a 的祖宗节点指向 b 的祖宗节点 
     }
 }
 
