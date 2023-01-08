@@ -12,7 +12,7 @@ Dijstra 每次都贪当前最小的权重
 bellmanFord 会暴力更新所有边
 spfa 基于 bellmanFord 的优化, bellmanFord 会遍历所有边但是 spfa 是遍历当前能联通的边
      如果源点和终点没有联通, 那么终点也不会被更新到
-     spfa 的 st数组可逆为了防止队列中有重复点, Dijkstra 的 st[] 不可逆记录已经确定的最小点
+     spfa 的 st[] 可逆为了防止队列中有重复点, Dijkstra 的 st[] 不可逆记录已经确定的最小点
 
 Dijstra 和 Prim 更新的都是自己连出去的, 因为只更新了自己连出去的
 其他边都是正无穷

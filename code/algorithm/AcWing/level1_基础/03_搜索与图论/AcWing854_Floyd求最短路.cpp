@@ -43,7 +43,7 @@ int d[N][N];
 int n, m, q;
 
 
-// dp[k][i][j]: 从 i 这个点出发达只经过 1~k 这些中间点到达 j 的最短距离
+// dp[k][i][j]:从 i 这个点出发达只经过 1~k 这些中间点到达 j 的最短距离
 void floyd()
 {
     for (int k = 1; k <= n; ++ k )  

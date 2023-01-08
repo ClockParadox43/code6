@@ -70,12 +70,12 @@ void bellman_ford()
     dist[1] = 0;
 
     // 求不经过超过 k 条边, 迭代 k 次
-    for (int i = 0; i < k; ++ i )
+    for (int i = 0; i < k; ++ i)
     {
         // 每次在新的迭代前, 备份一下 dist 数组 -> backup
         memcpy(backup, dist, sizeof dist);
         // ps:没有更新到的全是 INF
-        for (int j = 0; j < m; ++ j )
+        for (int j = 0; j < m; ++ j)
         {
             // edges[i]:第 i 条边
             // 情况1: a 被更新到, 表示 1~a 的距离

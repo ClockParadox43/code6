@@ -17,7 +17,7 @@ const int N = 510, M = 100010;
 int n1, n2, m;
 int h[N], ne[M], e[M], idx;
 bool st[N];
-int match[N];
+int match[N];   // match中存的是对于每个右边的点(下标), 匹配到的左边的点 match[i]
 
 void add(int a, int b)
 {
@@ -30,10 +30,11 @@ int find(int x)
     for (int i = h[x]; i != -1; i = ne[i])
     {
         int j = e[i];   
-        if (!st[j])     // 如果这一轮模拟匹配中, 这个点尚未被预定
+        // 右边的点必须在这一轮没有被考虑过, 考虑过就不重复考虑了, 从上往下匹配
+        if (!st[j])     
         {
-            st[j] = true;   // x 就预定这个 j
-            if (!match[j] || find(match[j]))    // 如果 j 没有匹配, 或 j 还可以匹配其他点, 配对成功
+            st[j] = true; // x 就预定这个 j
+            if (!match[j] || find(match[j])) // 如果 j 没有匹配, 或 match[j](左边的点) 还可以匹配其他点, 则配对成功
             {
                 match[j] = x;
                 return true;
@@ -48,6 +49,8 @@ int main()
 {
     memset(h, -1, sizeof h);
     scanf("%d%d%d", &n1, &n2, &m);
+    
+    // 虽然是无向图, 但只会找左边每个点的所有边, 所以存 a->b 的即可
     while (m -- )
     {
         int a, b;
@@ -55,6 +58,7 @@ int main()
         add(a, b);
     }
 
+    // 遍历所有点, 依次分析每个左边的点匹配哪个右边的点
     int res = 0;
     for (int i = 1; i <= n1; ++ i )
     {

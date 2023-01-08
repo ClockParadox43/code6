@@ -42,7 +42,7 @@ int bfs(string start)
     q.push(start);
     d[start] = 0;       // "12x":0 -> 表示起点的距离是 0 
     
-    int dx[4] = {-1, 0, 1, 0}, dy[4] = {0, 1, 0, -1};
+    
 
     while (q.size())
     {

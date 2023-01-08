@@ -57,7 +57,7 @@ int main()
     bool flag = true;
     for (int i = 1; i <= n; ++ i ) // 枚举所有点
     {
-        if (!st[i])
+        if (!st[i])     // 如果该点没有染色过就去染色
         {
             if (!dfs(i, 1)) // 染色失败相当于存在相邻的2个点染了相同的颜色
             {

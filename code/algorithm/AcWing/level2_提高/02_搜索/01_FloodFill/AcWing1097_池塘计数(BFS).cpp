@@ -24,13 +24,13 @@ void bfs(int sx, int sy)
     {
         PII t = q[hh ++ ];
         // 只看周围 8 个格子
-        for (int i = t.x - 1; i <= t.x + 1; ++ i )
-            for (int j = t.y - 1; j <= t.y + 1; ++ j )
+        for (int i = t.x - 1; i <= t.x + 1; ++ i)
+            for (int j = t.y - 1; j <= t.y + 1; ++ j)
             {
                 if (i == t.x && j == t.y) continue;               // 自己不用看, 看自己周围的格子就行
                 if (i < 0 || i >= n || j < 0 || j >= m) continue; // 越界情况
                 if (g[i][j] == '.' || st[i][j]) continue;         // 遍历过或者不是水的情况
-                q[ ++ tt] = {i, j};                              // 有水的格子全部进了队列
+                q[ ++ tt] = {i, j};                               // 有水的格子全部进了队列
                 st[i][j] = true;
             }
     }
@@ -42,8 +42,8 @@ int main()
     for (int i = 0; i < n; ++ i ) scanf("%s", g[i]);
     
     int cnt = 0;
-    for (int i = 0; i < n; ++ i )
-        for (int j = 0; j < m; ++ j )
+    for (int i = 0; i < n; ++ i)
+        for (int j = 0; j < m; ++ j)
             if (g[i][j] == 'W' && !st[i][j])
                 bfs(i, j), cnt ++ ;
             
