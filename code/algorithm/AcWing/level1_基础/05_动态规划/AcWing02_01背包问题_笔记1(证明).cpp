@@ -25,10 +25,10 @@ int main()
     int n, m;
     scanf("%d%d", &n, &m);
     
-    for (int i = 1; i <= n; ++ i ) scanf("%d%d", &v[i], &w[i]);
+    for (int i = 1; i <= n; ++ i) scanf("%d%d", &v[i], &w[i]);
     
-    for (int i = 1; i <= n; ++ i )
-        for (int j = m; j >= v[i]; -- j )
+    for (int i = 1; i <= n; ++ i)
+        for (int j = m; j >= v[i]; -- j)
         {
             // 枚举每个物品在不同容量时的状态
             // 第 1 件物品在容量为 0 的时候, 依赖上个格子, 也是 0  

@@ -45,7 +45,7 @@ int main()
     for (int i = 1; i <= n; ++ i ) s[i] += s[i - 1];
 
     for (int len = 2; len <= n; ++ len )
-        for (int i = 1; i + len - 1 <= n; ++ i )
+        for (int i = 1; i + len - 1 <= n; ++ i )    // i 是下标(为什么-1, 代入换算下即可)
         {
             int l = i, r = i + len - 1;         // l:起点, r:终点
             f[l][r] = 1e8;
