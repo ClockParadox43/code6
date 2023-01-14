@@ -20,6 +20,8 @@ const int MAXN = 1005;
 int n, m, M;      // 划分 4, 每一份不超过 3 (n 的 m 划分)
 int dp[MAXN][MAXN];
 
+//dp[m][n] 表示m个数相加为n的方案数
+//dp[m][n] = dp[m][n-m]+dp[m-1][n]
 int main()
 {
     scanf("%d%d%d", &n, &m, &M);
@@ -30,7 +32,7 @@ int main()
         {
             // 包含 0 的方案
             dp[i][j] += dp[i - 1][j];
-            // 如果 i < j, 那么也不可能划分为 j 组
+            // 如果 j >= i, 那么也可以划分为 i 份
             if (j >= i)
 				dp[i][j] += dp[i][j - i];
              dp[i][j] %= M;
