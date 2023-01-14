@@ -30,13 +30,17 @@ int main()
     memset(dp, 0x3f, sizeof dp);
     dp[0][0] = 0;
 
+    // f[i,j] 是个集合:在前 i 个物品中选择价值为 j 的物品
+    // 将之前的结果和选择当前物品做对比
     for (int i = 0; i < n; ++ i)
         for (int j = 0; j <= MAXN * MAXV; ++ j)
             if (j < v[i]) 
                 dp[i + 1][j] = dp[i][j];
             else 
-                dp[i + 1][j] = min(dp[i][j], dp[i - 1][j - v[i]] + w[i]);
+                dp[i + 1][j] = min(dp[i][j], dp[i - 1][j - v[i]] + w[i]);   // 减去该物品的价值, 选择该物品的重量
 
+    // 已经在重量为 i 的时候选择了第 n 件物品, 该 dp 保证的是当前价值的最小重量, 所以枚举到题目所需的重量即可
+    // 重量越小能放的物品越多, 价值也就越大
     int res = 0;
     for (int i = 0; i <= MAXN * MAXV; ++ i ) 
         if (dp[n][i] <= m) res = i;
