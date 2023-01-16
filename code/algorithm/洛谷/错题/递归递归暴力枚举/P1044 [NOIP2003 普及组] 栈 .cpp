@@ -1,39 +1,27 @@
-/*
-    1) i 表示还有几个待排列的数, j 表示栈中有 j 个数, f[i,j]表示情况数
-    2) 只要 f[i, j] 有值就返回, 表示该种情况的情况的数
-    3) 返回, 如果数全在栈里了, 所以 i = 0, 返回 1
-    4) 两种情况: 第一种是栈为空,  那么只有队列中的数可以入栈 f[i - 1][j + 1]
-                 第二种是栈不为空, 那么队列中的数可以给栈 f[i + 1][j - 1]
-                 或者只出栈 f[i][j - 1]
-*/
-
 #include <iostream>
 
 using namespace std;
-const int MAXN = 20;
+const int MAXN = 30;
 
-int n;
-int f[MAXN][MAXN];
-int ans;
+int a, b;
+int w[MAXN];
 
-void dfs(int i, j)
+int get_bit(int x)
 {
-    if (!i)
+    while (x)
     {
-        ans = 1;
-        return ;
+        int t = x % 10;
+        w[t] ++ ;
+        x /= 10;
     }
-    
-    if (j)      // 栈中还剩下数的情况, 栈中的数给队列
-        ans += dfs(i + 1, j - 1);
-    else ans += dfs(i - 1, j + 1);
 }
 
 int main()
 {
-    scanf("%d", &n);
-    dfs(n, 0);      // 初始情况栈里没有数
-    cout << ans << endl;
+    scanf("%d%d", &a, &b);
+    
+    for (int i = a; i <= b; ++ i)
+        get_bit(i);
+    for (int i = 0; i <= 9; ++ i) printf("%d ", w[i]);
     return 0;
 }
-
