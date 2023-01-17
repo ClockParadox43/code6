@@ -16,7 +16,7 @@ int top, st[MAXN];
 
 int main()
 { 
-    q["one"]=1;q["two"]=2;q["three"]=3;q["four"]=4;q["five"]=5;q["six"]=6;q["seven"]=7;q["eight"]=8;q["nine"]=9;q["ten"]=10；
+    q["one"]=1;q["two"]=2;q["three"]=3;q["four"]=4;q["five"]=5;q["six"]=6;q["seven"]=7;q["eight"]=8;q["nine"]=9;q["ten"]=10;
     q["eleven"]=11;q["twelve"]=12;q["thirteen"]=13;q["fourteen"]=14;q["fifteen"]=15;q["sixteen"]=16;q["seventeen"]=17;q["eighteen"]=18;q["nineteen"]=19;q["twenty"]=20;
     q["a"]=1;q["both"]=2;q["another"]=1;q["first"]=1;q["second"]=2;q["third"]=3;
     //打表
@@ -36,7 +36,7 @@ int main()
 
     for (int i = 2; i <= top; ++ i)
     {
-        if (st[i] < 10) cout << 0; 
+        if (st[i] < 10) cout << 0;  // 01, 02, 03...
         cout << st[i];
     }
     return 0;
