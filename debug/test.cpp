@@ -1,66 +1,35 @@
 #include <iostream>
-#include <unordered_map>
-#include <vector>
-
-#define fst first
-#define scd second
+#include <algorithm>
 
 using namespace std;
 typedef long long LL;
-typedef pair<string, string> PSS;
+const int MAXN = 1e6 + 3;
 
+
+int n, m, l, r, a[MAXN], b[MAXN];
+LL sum, ans;
+
+// 按照数位之和的升序排序
 int main()
 {
-    ios::sync_with_stdio(false);
-    cin.tie(nullptr), cout.tie(nullptr);
-    int n; cin >> n;
-
+    cin >> n;
+    for (int i = 1; i <= n; ++ i) cin >> a[i];
+    cin >> m;
+    while (m -- )       // 输入的同时处理差分
+        cin >> l >> r, b[l] ++ ; b[r + 1] -- ;
     
-    
-    int cnt = 1;        // 统计有一个点 / 为每个点标记序号
-    vector<PSS> a(n);       
-    unordered_map<string, int> id;  // 为每个点标记序号
-    for (int i = 0; i < n; ++ i)
+    // 先得到数组 c (仍存放在数组 b 中), 在顺便统计原来的总和 sum
+    for (int i = 1; i <= n; ++ i)
     {
-        cin >> a[i].fst >> a[i].scd;                // fst 有指向 scd 的边
-        if (!id[a[i].fst]) id[a[i].fst] = cnt ++ ;  // 如果 fst 的 id 为 0(说明没来过), 那么 fst 的边就加一
-        if (!id[a[i].scd]) id[a[i].scd] = cnt ++ ;  // 如果 scd 的 id 为 0(说明没来过), 那么 scd 的边就加一
+        b[i] += b[i - 1];
+        sum += (LL) a[i] * b[i];  
     }
 
-    // 建立图
-    // 通过过 a[i] 取出第 i 个字符串取出存在 id 中的点, 用 g 来存 
-    // 让 fst 的点指向 scd 的点
-    vector<vector<int>> g(cnt + 1);
-    for (int i = 0; i < n; ++ i)
-        g[id[a[i].fst]].push_back(id[a[i].scd]);
-
-    bool ok = true;
-    vector<bool> vis(cnt + 1);  // 左闭右开
+    // 分别排序
+    sort(a + 1, a + n + 1), sort(b + 1, b + n + 1);
     
-    function<void(int, int, int)> dfs = [&](int u, int fa, int cnt)
-    {
-        if (cnt && u == fa)
-        {
-            ok = false; 
-            return;
-        }
-
-        for (auto v : g[u])  // 遍历当前 u 行, g是二维数组, 自己可以指向 v
-        {       
-            vis[v] = true;          // 当前孩子标记为 true 
-            dfs(v, fa, cnt + 1);    // 将孩子作为当前节点传递, 看看孩子是否指向父亲, 有的话就返回
-        }
-    };
-
-    for (int i = 1; i < cnt; ++ i)
-        if (!vis[i] && ok)
-        {
-            vis[i] = true;
-            dfs(i, i, 0);
-        }
-    
-    if (ok) cout << "Yes\n";
-    else cout << "No\n";
-    
+    for (int i = 1; i <= n; ++ i)
+        ans += (LL) a[i] * b[i;]    
+    cout << ans - sum;
     return 0;
 }
