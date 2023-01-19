@@ -1,35 +1,32 @@
 #include <iostream>
-#include <algorithm>
+#include <queue>
 
 using namespace std;
-typedef long long LL;
-const int MAXN = 1e6 + 3;
 
+const int MAXN = 100004;
 
-int n, m, l, r, a[MAXN], b[MAXN];
-LL sum, ans;
+int n;
+int a[MAXN];
 
-// 按照数位之和的升序排序
 int main()
 {
-    cin >> n;
-    for (int i = 1; i <= n; ++ i) cin >> a[i];
-    cin >> m;
-    while (m -- )       // 输入的同时处理差分
-        cin >> l >> r, b[l] ++ ; b[r + 1] -- ;
-    
-    // 先得到数组 c (仍存放在数组 b 中), 在顺便统计原来的总和 sum
-    for (int i = 1; i <= n; ++ i)
-    {
-        b[i] += b[i - 1];
-        sum += (LL) a[i] * b[i];  
-    }
+    scanf("%d", &n);
+    priority_queue<int, vector<int, greater<int>> heap;
 
-    // 分别排序
-    sort(a + 1, a + n + 1), sort(b + 1, b + n + 1);
+    for (int i = 0; i < n; ++ i)
+    {
+        int x; scanf("%d", &x);
+        a[i] = x;
+        heap.push(x);
+    }    
     
-    for (int i = 1; i <= n; ++ i)
-        ans += (LL) a[i] * b[i;]    
-    cout << ans - sum;
-    return 0;
+    while (heap.size() > 1)
+    {
+        int a = heap.front(); heap.pop();
+        int b = heap.front(); heap.pop();
+        int c = a + b;
+        heap.push(c); 
+    }
+    
+
 }
