@@ -2,26 +2,22 @@
 
 using namespace std;
 
-const int mod = 1e9 + 7;
-
-int qmin(int a, int b, int p)
-{    
-    int res = 1 % mod;
-    for (; b; b >>= i)
-    {
-        if (b & 1) res = res * a % mod;
-        a = a * a % mod;   
-    } 
-    return res;
-}
-
 int main()
 {
-    int n; scanf("%d", &n);
-    while (n -- )
+    scanf("%d", &n);
+    
+    int ans = 0; 
+    for (int i = 2; i < n / i; ++ i)
     {
-        int a, b, p; scanf("%d%d%d", &a, &b, &p);
-        cout << qmin(a, b, p) << endl;
+        if (n % i == 0) 
+        {
+            int s = 0;
+            while (n % i)
+                n /= i, ++ i;
+            ans = max(n, ans);
+        }
+        if (n > 1) ans = max(n, ans);
     }
+    cout << ans << endl;
     return 0;
 }

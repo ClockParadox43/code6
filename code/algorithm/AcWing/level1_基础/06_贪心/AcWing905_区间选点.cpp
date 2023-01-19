@@ -1,31 +1,70 @@
+// 1) 将每个区间按右端点从小到大排序
+// 2) 如果往后依次枚举每个区间
+//      如果当前区间中已经包含点, 则直接 pass
+//      否则, 选择当前区间的右端点
+//
+// 证明两个值和最优解相等 -> A == B
+// 证明 A >= B
+//      A <= B
+// 
+// A<=B:
+// ans 每次都是贪的都是当前最小值
+// cnt:当前选择的点的个数
+// cnt代表所有可行的方案, ans代表可行方案中的最小值
+// 
+// A>=B:
+// 包含该点直接 pass, 所以下一个选择点的区间和上一个选择点的区间没有交集
+// 之后选择的点以此类推
+// 想把区间覆盖至少需要 cnt 个点
+// 所以说所有的可行方案的点数一定大于 cnt
+
 #include <iostream>
 #include <algorithm>
 
 using namespace std;
-const int MAXN = 1e5 + 6;
+
+const int N = 100010;
 
 int n;
-PII segs[MAXN];
+
+struct Range
+{
+    int l, r;
+    bool operator<(const Range& W) const
+    {
+        return r < W.r;
+    }
+}range[N];
+
+void test()
+{
+    scanf("%d", &n);
+    // 初始化区间
+    for (int i = 0; i < n; ++i)
+    {
+        int r, l;
+        scanf("%d%d", &l, &r);
+        range[i] = { l, r };
+    }
+
+    sort(range, range + n);
+
+    // 右端点只会小~大
+    // 1) 如果有被包含的区间就 pass
+    // 2) 没有交集的区间选择
+    int res = 0, ed = -2e9;
+    for (int i = 0; i < n; ++ i)
+        if (range[i].l > ed)            // 当前区间左端点 > 上个区间的右端点
+        {
+            res ++ ;
+            ed = range[i].r;
+        }
+
+    cout << res << endl;
+}
 
 int main()
 {
-    scanf("%d", &n);
-    for (int i = 0; i < n; ++ i)
-    {
-        int l, r; scanf("%d%d", &l , &r);
-        segs[i] = {l, r};
-    }
-
-    sort(segs, segs + n);   // 按照左端点排序
-
-    int cnt = 0;
-    int st = -1e9 + 1, ed = -1e9 + 1;
-    for (int i = 0; i < n; ++ i)
-    {
-        if (ed < st)    // 有新的线段出现
-            cnt ++, st = segs[i].first, ed = segs[i].seocnd;
-        else 
-            ed = ed;        // 扩大范围
-    }   
-    cout << cnt << endl;
+    test();
+    return 0;
 }
