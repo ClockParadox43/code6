@@ -1,32 +1,30 @@
 #include <iostream>
-#include <queue>
 
 using namespace std;
+const int MAXN = 1003;
 
-const int MAXN = 100004;
-
-int n;
-int a[MAXN];
+int a[MAXN], b[MAXN], c[MAXN];
 
 int main()
 {
-    scanf("%d", &n);
-    priority_queue<int, vector<int, greater<int>> heap;
+    string A, B; cin >> A >> B;
+    int len = max(A.size(), B.size());
 
-    for (int i = 0; i < n; ++ i)
-    {
-        int x; scanf("%d", &x);
-        a[i] = x;
-        heap.push(x);
-    }    
+    // 将低位存在最上面
+    for (int i = A.size() - 1, j = 1; i >= 0; -- i, ++ j)
+        a[j] = A[i] - '0';
+    for (int i = A.size() - 1, j = 1; i >= 0; -- i, ++ j)
+        b[j] = B[i] - '0';
     
-    while (heap.size() > 1)
+    for (int i = 1; i <= len; ++ i)
     {
-        int a = heap.front(); heap.pop();
-        int b = heap.front(); heap.pop();
-        int c = a + b;
-        heap.push(c); 
+        c[i] += a[i] + b[i];    // 将低位加上
+        c[i + 1] = c[i] / 10;   // 模拟进位
+        c[i] %= 10;
     }
-    
 
+    if (c[len + 1]) len ++ ;
+    for (int i = len; i >= 1; -- i)
+        cout << c[i];
+    return 0;
 }

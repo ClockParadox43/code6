@@ -11,12 +11,19 @@ using namespace std;
 vector<int> mul(vector<int>& A, int b)
 {
     vector<int> C;
+    int t = 0;
     // 当 i 没有循环完的时候并且进位没有处理完的时候, for 循环要继续
-    for (int i = 0, t = 0; i < A.size() || t; ++ i )
+    for (int i = 0; i < A.size(); ++ i )
     {
-         if (i < A.size()) t += A[i] * b;       // 处理完最后一位后, 如果 t 没有因为 / 10 处理完, 还需要进行下次循环
+         t += A[i] * b;       // 处理完最后一位后, 如果 t 没有因为 / 10 处理完, 还需要进行下次循环
          C.push_back(t % 10);
          t /= 10;
+    }
+
+    while (t) 
+    {
+        C.push_back(t % 10);
+        t /= 10;
     }
     
     while (C.size() > 1 && C.back() == 0 ) C.pop_back();

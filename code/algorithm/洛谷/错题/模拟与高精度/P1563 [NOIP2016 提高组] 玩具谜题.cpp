@@ -13,13 +13,15 @@ int main()
     for (int i = 0; i < n; ++ i )
         cin >> st[i] >> name[i];
     
+    // s:代表状态, t:代表个数
+    // cnt: 下标
     int cnt = 0;
     while (m -- )
     {
         int z, s; scanf("%d%d", &z, &s);
-        if (st[cnt] == z)
+        if (st[cnt] == z)                   // 相等就是往右(逆时针, 逆时针就要减去)
             cnt = (cnt - s % n + n) % n; 
-        else
+        else                                // 不相等就是往左(也就是顺时针)
             cnt = (cnt + n + s) % n;
     }
 
