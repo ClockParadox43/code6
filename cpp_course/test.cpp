@@ -1,23 +1,17 @@
 #include <iostream>
 
 using namespace std;
+typedef long long ll;
 
 int main()
 {
-    scanf("%d", &n);
-    
-    int ans = 0; 
-    for (int i = 2; i < n / i; ++ i)
+    ll n = 20, num = 1, ans = 0;
+    for (ll i = 1; i <= n; ++ i)
     {
-        if (n % i == 0) 
-        {
-            int s = 0;
-            while (n % i)
-                n /= i, ++ i;
-            ans = max(n, ans);
-        }
-        if (n > 1) ans = max(n, ans);
+        num *= i;
+        ans += num;
     }
-    cout << ans << endl;
+
+    cout << ans;
     return 0;
 }
