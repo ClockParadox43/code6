@@ -80,9 +80,9 @@ int main()
         // 横着放的话从 1 开始, 因为第 0 列不够两个格子
         f[0][0] = 1;
         // 枚举每一列
-        for (int i = 1; i <= m; ++ i )
-            for (int j = 0; j < 1 << n; ++ j )
-                for (int k = 0; k < 1 << n; ++ k )
+        for (int i = 1; i <= m; ++ i)
+            for (int j = 0; j < 1 << n; ++ j)
+                for (int k = 0; k < 1 << n; ++ k)
                     if ((j & k) == 0 && st[j | k])
                         f[i][j] += f[i - 1][k];         // 累加上上一列的状态
         

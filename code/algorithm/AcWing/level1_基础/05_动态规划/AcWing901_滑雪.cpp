@@ -23,7 +23,7 @@ const int N = 310;
 
 int n, m;
 int g[N][N];
-int f[N][N];
+int f[N][N];        // 从 [i,j] 开始滑的路径求最长
 
 int dx[4] = {-1, 0, 1, 0}, dy[4] = {0, 1, 0, -1};
 

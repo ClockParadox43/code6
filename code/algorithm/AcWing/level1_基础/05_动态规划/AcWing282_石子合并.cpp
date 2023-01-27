@@ -45,7 +45,7 @@ int main()
     for (int i = 1; i <= n; ++ i ) s[i] += s[i - 1];
 
     for (int len = 2; len <= n; ++ len )        // 枚举长度
-        for (int i = 1; i + len - 1 <= n; ++ i )    // 枚举每一组终点起点, i 是下标(为什么-1, 代入换算下即可)
+        for (int i = 1; i + len - 1 <= n; ++ i )    // 枚举每一组终点起点(为什么-1, 代入换算下即可, i+len-1是终点)
         {
             int l = i, r = i + len - 1;         // l:起点, r:终点
             f[l][r] = 1e8;

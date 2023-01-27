@@ -12,16 +12,17 @@ int n;
 int f[MAXN][MAXN];
 int w[MAXN][MAXN];
 
+// 最先返回到 (1,1)
 int dp(int i, int j)
 {
     if (f[i][j] >= 0) return f[i][j];
-    if (i == 1 && j == 1) return w[i][j];
-    if (i < 1 || j < 1) return INF;
+    if (i == 1 && j == 1) return w[i][j];   // 走到 dp(1,1) 必然返回(边界), 因此所有计算都是建立在 f(1,1) 上
+    if (i < 1 || j < 1) return INF;         // 边界外的必然不会取
 
     int t = INF;
-    t = min(t, dp(i - 1, j));
-    t = min(t, dp(i, j - 1));
-    return f[i][j] = t + w[i][j];
+    t = min(t, dp(i - 1, j) + w[i][j]);
+    t = min(t, dp(i, j - 1) + w[i][j]);
+    return f[i][j] = t;
 }
 
 int main()

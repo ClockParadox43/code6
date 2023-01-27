@@ -54,45 +54,32 @@ int n, m;
 int v[N], w[N];
 int f[N];
 
-void test()
+// 每次将一组物品{v,w,s}分解开, 将 k 个第 i 个物品打包在一起, 只要 k <= s 就可以分          
+// 1) 将 k 个物品打包在一起 
+//    k 个物品打包在一起体积就是 a * k
+//    价值就是 b * k
+ // 2) k *= 2, 因为任何数都可以由若干指数不同的 2 的次幂组成, 所以只要求 k^2
+//    cnt 是每个物品的编号     
+int main()
 {
-    cin >> n >> m;
+    scanf("%d%d", &n, &m);
     
-    // 输入
     int cnt = 0;
     for (int i = 1; i <= n; ++ i)
     {
-        int a, b, s;
-        cin >> a >> b >> s;
-        int k = 1;                  // 每次将 k 个第 i 个物品打包在一起, 只要 k <= s 就可以分          
-        while (k <= s)              // 1) 将 k 个物品打包在一起 
-        {                           //    k 个物品打包在一起体积就是 a * k
-            ++ cnt ;                //    价值就是 b * k
-            v[cnt] = a * k;         // 2) k *= 2, 因为任何数都可以由若干指数不同的 2 的次幂组成, 所以只要求 k^2
-            w[cnt] = b * k;         //    cnt 是每个物品的编号     
-            s -= k;
-            k *= 2;
-        }
-
-        // 剩余物品的情况
+        int a, b, s; scanf("%d%d%d", &a, &b, &s);
+        int k = 1;
+        while (k <= s)
+            ++ cnt, w[cnt] = k * a, v[cnt] = k * b, s -= k, k *= 2;
+        
         if (s > 0)
-        {
-            ++ cnt ;
-            v[cnt] = s * a;
-            w[cnt] = s * b;
-        }    
+            cnt ++, w[cnt] = s * a, v[cnt] = s * b;
     }
     
-    // 最后在做一遍 "01背包" 即可
-    for (int i = 1; i <= n; ++ i)
-        for (int j = m; j >= v[i]; -- j)
-            if (j >= v[i]) f[j] = max(f[j], f[j - v[i]] + w[i]);
-    
-    cout << f[m] << endl;
-}
-
-int main()
-{
-    test();
+    for (int i = 1; i <= cnt; ++ i)
+        for (int j = m; j >= w[i]; -- j)
+            f[j] = max(f[j], f[j - w[i]] + v[i]);
+            
+    printf("%d", f[m]);
     return 0;
 }
