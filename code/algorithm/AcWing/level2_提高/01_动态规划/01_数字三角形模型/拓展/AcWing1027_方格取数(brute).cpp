@@ -33,6 +33,7 @@ int main()
                     int t2 = max(f[i - 1][j][h][k - 1], f[i][j - 1][h - 1][k]);
                     f[i][j][h][k] = max(t1, t2) + w[i][j];
                     if (i != h && j != k) f[i][j][h][k] += w[h][k];        // 如果走的路径不相同
+                    // printf("f[%d][%d][%d][%d]:%d%c", i, j, h, k, f[i][j][h][k], k < n ? 0x20 : 0x0A);
                 }
 
     cout << f[n][n][n][n];
