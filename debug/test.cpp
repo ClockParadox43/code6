@@ -2,34 +2,33 @@
 
 using namespace std;
 
-const int MAXN = 103;
+const int MAXN = 55;
 
-int n;
+int n, ans;
 int w[MAXN];
-int f[MAXN], fl[MAXN];
+int up[MAXN], down[MAXN];   // 上升子序列, 下降子序列
+
+void dfs(int u, int su, int sd)
+{
+    if (su + sd >= ans) return;     
+    if (u == n) { ans = su + sd; return; }
+
+    int k = 0;
+    while (k < su && up[k] >= q[u]) ++ k;
+    int t = up[k];
+    up[k] = q[u];
+    if (k < su) dfs(u + 1, su, sd);
+    
+}
 
 int main()
 {
-    scanf("%d", &n);
-    for (int i = 0; i < n; ++ i) scanf("%d", &w[i]);
-    
-    for (int i = 0; i < n; ++ i)
+    while (cin >> n, n)
     {
-        f[i] = 1;
-        for (int j = 0; j < i; ++ i)
-            if (w[i] > w[j]) f[i] = max(f[i], f[j] + 1);
+        for (int i = 0; i < n; ++ i) cin >> w[i];
+        ans = n;  // 最坏情况
+        dfs(0, 0, 0);
+        cout << ans << endl;
     }
-
-    for (int i = n - 1; i >= 0; -- i)
-    {
-        f[i] = 1;
-        for (int j = n - 1; j > i; -- j)
-            if (w[i] > w[j]) f[i] = max(f[i], f[j] + 1);
-    }
-
-    int range = 0;
-    for (int i = 0; i < n; ++ i) range = max(range, f[i] + f[j] - 1);
-    
-    cout << n - range;
     return 0;
 }
