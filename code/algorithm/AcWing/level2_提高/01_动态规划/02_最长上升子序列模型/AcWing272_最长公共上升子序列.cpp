@@ -57,6 +57,7 @@ int n;
 int a[N], b[N];
 int f[N][N];
 
+
 int main()
 {
     scanf("%d", &n);
