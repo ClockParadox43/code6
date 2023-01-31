@@ -19,6 +19,7 @@ int main()
     }
 
     int k = Wl - 1;
+    // 找最小, 找到第一个不相等的就是
     while (k > 0 && f[W][k - 1] == f[W][Wl - 1]) k -- ;
     cout << f[W][Wl - 1] << ' ' << Wl - k << endl;
     return 0;
