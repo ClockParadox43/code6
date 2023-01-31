@@ -5,8 +5,6 @@
 //
 // 状态计算: 不选择 f[i - 1][j]
 //             选择 f[i - 1][j - k * v[i]] + w[i]
-// 
-
 #include <iostream>
 #include <algorithm>
 
@@ -22,14 +20,13 @@ int main()
 {
     scanf("%d%d", &n, &m);
     
-    for (int i = 1; i <= n; ++ i ) scanf("%d%d%d", &v[i], &w[i], &s[i]);
+    for (int i = 1; i <= n; ++ i) scanf("%d%d%d", &v[i], &w[i], &s[i]);
     
-    for (int i = 1; i <= n; ++ i )
-        for (int j = 0; j <= m; ++ j )
-            for (int k = 0; k * v[i] <= j && k <= s[i]; ++ k ) 
+    for (int i = 1; i <= n; ++ i)
+        for (int j = 0; j <= m; ++ j)
+            for (int k = 0; k * v[i] <= j && k <= s[i]; ++ k) 
                 f[i][j] = max(f[i][j], f[i - 1][j - v[i] * k] + w[i] * k);
-        
-   
+    
     printf("%d", f[n][m]);         
     return 0;
 }
