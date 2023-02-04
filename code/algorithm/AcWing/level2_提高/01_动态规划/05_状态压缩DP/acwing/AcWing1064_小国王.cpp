@@ -18,6 +18,7 @@
 // 10 * 100 * 2^10 * 2^10 = 10^9
 
 #include <iostream>
+#include <vector>
 
 using namespace std;
 
@@ -28,8 +29,25 @@ int n, m;
 vector<int> st;        // st:表示所有和法状态 
 vector<int> head[M];   // 每一状态所有可以转移到的其他状态
 ll f[N][K][M]; 
-int cnt[M], id[M];     // cnt:每个状态里面1的数量
-                       //  id:存这个每一个状态和这个它的下标之间的映射关系
+int cnt[M];     // cnt:每个状态里面1的数量
+                     
+
+bool check(int state)
+{
+    for (int i = 0; i < n; ++ i)
+        if((state >> i & 1) && (state >> i + 1 & 1))
+            return false; // 如果存在连续两个1的话就不合法
+    return true;        
+}
+
+// 这里就是计算某个数二进制里面1的个数
+int count(int state)
+{
+    int res = 0;
+    for(int i = 0;i < n;i ++ ) res += state >> i & 1;
+    return res;
+}
+
 int main()
 {
     cin >> n >> m;
@@ -39,11 +57,10 @@ int main()
         if(check(i))    // 如果不存在连续的2个1
         {
             st.push_back(i);
-            id[i] = st.size() - 1;  // id存的是我们这个合法状态对应的下标是多少
             cnt[i] = count(i);      // 每个状态里面1的数量
         }
     
-    // 个不同状态之间的一个这个边的关系
+    // 预处理所有合法状态的合法转移
     for (int i = 0; i < st.size(); ++ i)
         for (int j = 0; j < st.size(); ++ j)
         {
@@ -54,6 +71,8 @@ int main()
             // a 和 b 的交集必须要是空集, 并集不能包含连续两个1
             if (!(a & b) && check(a | b))
                 head[i].push_back(j);       // 如果b是合法状态将b添加至a可以转移到的状态集合中
+            // ps:此时说明下标为i的状态能接在下标为j的状态后(即下一行), 则说明下标为i的状态能由下标为j的状态转移而来
+            //    即将下标j存进head[i] ~
         }
 
         // 前0行已经摆完了, 一个国王都没有摆的情况, 0 这个状态是合法的
@@ -65,13 +84,19 @@ int main()
                 for (int a = 0; a < st.size(); ++ a) // 然后我们来枚举一下所有的状态, a表示第i行的状态
                     for (int b : head[a])            // 枚举所有a能到的状态
                     {
-                        // 判断a中1的个数
-                        // 我们的j必须要大于等于c对吧, j是必须要大于等于c
-                        int c = cnt[state[a]];
-                        if (j >= c)                           // 如果数说满足要求的话, 那么我们就可以转移了
-                            f[i][j][a] += f[i - a][j - c][b]; // 转移的话就是f[i][j][a]+=f[i-1][j-c][b], 然后从b转移过来
+                        // c:判断a中1的个数
+                        int c = cnt[st[a]];
+                        if (j >= c)       
+                        { 
+                            // j是必须要大于等于c的, 当前这行摆放的国王数量一定要小于等于我们整个的上限
+                            f[i][j][a] += f[i - 1][j - c][b]; // 转移的话就是f[i][j][a]+=f[i-1][j-c][b], 然后从b转移过来
+                        }
                     }
+    
+    // 最后的答案 f[n][m][] 应该由枚举得到
+    // 小技巧: 就我们在枚举i的时候, 枚举到n+1就可以了
+    // 一共摆到了第n+1行, 然后m, 然后0, 因为第n+1行一个都没摆
+    // f[n+1][m][0]已经在这个循环里面被循环算出来
     cout << f[n + 1][m][0] << endl;
     return 0;
 }  
-
