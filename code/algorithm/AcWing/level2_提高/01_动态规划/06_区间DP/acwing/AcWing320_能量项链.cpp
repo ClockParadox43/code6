@@ -31,11 +31,9 @@ int main()
                 f[l][r] = max(f[l][r], f[l][k] + f[k][r] + a[l] * a[k] * a[r]);
         }
     
-    // 硬核理解k=l+1:每次len+1时, 之前的子集已经处理过了
-    // 之前的子集的值累加上差集, 中间有一个1的间隔
     int ans = 0;
     for (int i = 1; i <= n; ++ i)
-        ans = max(ans, f[i][i + n]);    
+        ans = max(ans, f[i][i + n]);    // 因为下标从1开始, 左端点是n, 右端点i+n+1就是i+n
     cout << ans << endl;
     
     return 0;
