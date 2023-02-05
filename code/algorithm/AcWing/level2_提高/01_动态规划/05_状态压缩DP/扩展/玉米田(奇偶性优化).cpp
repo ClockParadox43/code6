@@ -40,4 +40,4 @@ int main()
     cout << f[(n + 1) & 1][0] << endl;
 
     return 0;
-}
+}sd
