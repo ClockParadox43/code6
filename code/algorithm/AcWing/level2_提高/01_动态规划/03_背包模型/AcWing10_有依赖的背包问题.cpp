@@ -24,6 +24,7 @@ void add(int a, int b)
 
 void dfs(int u)
 {
+    // 将子树看做所有物品
     // 先枚举所有状态体积小于等于j-v[u]的所有子节点们能够获得的最大价值
     for (int i = h[u]; ~ i; i = ne[i])  // 循环物品组
     {
