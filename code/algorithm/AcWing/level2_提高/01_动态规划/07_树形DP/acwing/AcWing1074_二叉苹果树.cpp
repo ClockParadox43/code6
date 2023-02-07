@@ -37,6 +37,7 @@ void add(int a, int b, int c)
     e[idx] = b, w[idx] = c, ne[idx] = h[a], h[a] = idx ++ ;
 }
 
+// 先阶段, 再状态, 再决策
 void dfs(int u, int father)
 {
     // 枚举所有物品组
@@ -47,6 +48,9 @@ void dfs(int u, int father)
         dfs(ver, u);
         for (int j = m; j >= 0; -- j)
             for (int k = 0; k <= j - 1; ++ k) // 枚举体积预留一条连向父节点的边, 决策每组选择哪个物品
+            // f[ver][k]:该组的价值
+            // w[i]:自己的边
+            // 以体积为单位分组
                 f[u][j] = max(f[u][j], f[u][j - k - 1] + f[ver][k] + w[i]);
     }
 }
