@@ -277,6 +277,41 @@ if(f1&f2){
     f1=f2=1;
     return;
 }
+// sub中:
+if(f1^f2){
+    if(f1) f1^=1,f^=1,pls(a,b),f1^=1;
+    if(f2) f2^=1,pls(a,b),f2^=1;//减负数等效于加正数
+    return;
+}
+if(f1&f2){
+    f1=f2=0,mnu(b,a);
+    f1=f2=1;
+    return;
+}
+if(ABScmp(a,b) == 1){ // 注意这里是比较绝对值，|a| < |b|
+    f^=1;mnu(b,a);return; // (a - b) = - (b - a)
+}
+
+// mul中：略
+// iimul中：if(f1^f2) f^=1;
+// iidiv中：
+if(f1^f2){
+    if(f1) f1^=1,f^=1,div(a,b),f1^=1;
+    if(f2) f2^=1,f^=1,div(a,b),f2^=1;
+    return;
+}
+
+// icmp中：略
+// 其它函数的修改：略
+// 参考博客：https://www.luogu.com.cn/blog/AH2002/solution-p2005
+
+// 利用reserve和resize提高vector的效率
+// 由于需要不断进行push_back，故不用resize
+// https://blog.csdn.net/qq_37037492/article/details/86568290
+
+// memcpy的用法：https://blog.csdn.net/qq_35040828/article/details/71123521
+
+
 int main(){
     // 注意初始化，如A.pu(0)，乘法运算前应先A.pu(1)
     V x, y;
