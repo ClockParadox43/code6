@@ -125,8 +125,6 @@ ll dp(ll n)
         for (int j = 0; j < x; ++ j)
         {
             if (j == 7) continue;
-            
-        
             int a = mod(-last_a * power7[i + 1], 7), b = mod(-last_b, 7); 
             // 我们需要将符合条件的数筛出来
             // 求得本身模7不等于a, 并且各位数之和模7不等b的集合
