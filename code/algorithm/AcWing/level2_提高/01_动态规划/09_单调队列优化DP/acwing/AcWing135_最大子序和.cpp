@@ -28,7 +28,10 @@ int main()
     int hh = 0, tt = 0; q[0] = 0;
     for (int i = 1; i <= n; ++ i)
     {
-        while (hh <= tt && i - q[hh] > m) ++ hh;
+        // 因为前缀和的原因不须要算出当前队头下标
+        while (hh <= tt && q[hh] < i - m) ++ hh;
+        // 包含hh, 此时的hh还在窗口内, 题意需要用到前缀和数组的公式:s[j]-s[i-1], hh等价i-1位置
+        // 而hh正好在窗口内, 所以先记录答案再更新 
         res = max(res, s[i] - s[q[hh]]);        
         while (hh <= tt && s[q[tt]] >= s[i]) -- tt; // 使s[i]尽量小, res得到的才更大
         q[ ++ tt] = i;
