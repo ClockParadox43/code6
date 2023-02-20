@@ -30,13 +30,17 @@ void bfs(int sx, int sy, bool& has_higher, bool& has_lower)
                 if (i == t.x && j == t.y) continue;     // 自己不用判断, 把自己 contniue 掉之后自己就不会进入队列
                 if (i < 0 || i >= n || j < 0 || j >= n) continue;   // 越界
                 
+                // 不能先判断st是否被遍历过, 因为队列的两端性
+                // 提前判掉就不是相邻的山峰山谷了
                 if (h[i][j] != h[t.x][t.y])   // 山脉的边界
                 {
-                    if (h[i][j] > h[t.x][t.y]) has_higher = true;   // 判断自己周围有山峰还是山谷, 如果都有自己就什么也不是
-                    else has_lower = true;    
+                    // h[x,y]是山谷
+                    if (h[i][j] > h[t.x][t.y]) has_higher = true;   // i,j是山峰, 判断自己周围有山峰还是山谷, 如果都有自己就什么也不是
+                    else has_lower = true;    // i,j是山谷
                 }
                 else if (!st[i][j])         // 没判断过的格子进队列, 队列中只能有自己的同类集合, 所以只能用 else if, 
-                {                           // 判断自己周围, 如果是同类且没有遍历过, 就进入队列 
+                {           
+                    // 只有相等的才会进队列 // 判断自己周围, 如果是同类且没有遍历过, 就进入队列 
                     q[ ++ tt] = {i, j};     // 用自己的同类感染到所有和自己一样的区块
                     st[i][j] = true;
                 }
@@ -50,8 +54,7 @@ int main()
     for (int i = 0; i < n; i ++ )
         for (int j = 0; j < n; j ++ )
             scanf("%d", &h[i][j]);
-    
-    
+
     int peak = 0, valley = 0;
     for (int i = 0; i < n; i ++ )
         for (int j = 0; j < n; j ++ )

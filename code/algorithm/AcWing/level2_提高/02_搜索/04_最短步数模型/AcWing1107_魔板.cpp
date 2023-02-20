@@ -21,24 +21,15 @@ char g[2][4];
 unordered_map<string, pair<char, string>> pre;
 unordered_map<string, int> dist;
 
-// state 中存的是一维字符串, 需要将这个状态放到二维的 g[][] 中去
-//  _ _ _ _
-// |_|_|_|_|
-// |_|_|_|_|
-//  j
-//  _ _ _ _ _ _ _ _
-// |_|_|_|_|_|_|_|_|
-//                i
-// 因为数组是顺时针对应的
+
+// 将一维变二维
 void set(string state)
 {
     for (int i = 0; i < 4; ++ i ) g[0][i] = state[i];
     for (int i = 7, j = 0; j < 4; i --, j ++ ) g[1][j] = state[i]; 
-    // i:对应的是二维数组的低 1 行最后一格下标
-    // j:对应的是一维数组地 4 格
 }
 
-// 将二维矩阵变成字符串
+// 将二维变成一维
 string get()
 {
     string res;

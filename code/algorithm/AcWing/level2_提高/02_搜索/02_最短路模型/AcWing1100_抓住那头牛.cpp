@@ -1,5 +1,5 @@
 
-// 如果 k 在当前点左边, 就不需要 +1, *2 的选项了
+// 权重为1, 按照给定的限制bfs即可
 
 #include <iostream>
 #include <cstring>
