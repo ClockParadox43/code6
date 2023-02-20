@@ -8,8 +8,8 @@ using namespace std;
 
 const int N = 1e5 + 10;
 int n, k;
-int q[N];
-int dist[N];
+int q[N];       // 记录编号
+int dist[N];    // 记录距离
 int bfs()
 {
     memset(dist, -1, sizeof dist);
