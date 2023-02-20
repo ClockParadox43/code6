@@ -23,8 +23,8 @@ void dfs(int u)
         {
             ans ++ ;
             dfs(x);
-            st[x] = false;
         }
+    st[u] = false;
     
 }
 
